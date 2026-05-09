@@ -30,26 +30,6 @@ backend/.DS_Store
 backend/logs/
 backend/*.log
 
-# AI Layer (Python)
-ai-layer/__pycache__/
-ai-layer/*.py[cod]
-ai-layer/*$py.class
-ai-layer/.venv/
-ai-layer/venv/
-ai-layer/ENV/
-ai-layer/.env
-ai-layer/.conda/
-ai-layer/dist/
-ai-layer/build/
-ai-layer/*.egg-info/
-ai-layer/.pytest_cache/
-ai-layer/.coverage
-ai-layer/htmlcov/
-
-# Common
-common/lib/
-common/.DS_Store
-
 # Logs
 *.log
 logs/
