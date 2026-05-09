@@ -1,0 +1,64 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+
+# Frontend (Vue3)
+frontend/node_modules/
+frontend/dist/
+frontend/.DS_Store
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.env.local
+frontend/.env.production.local
+
+# Backend (SpringBoot/Java)
+backend/target/
+backend/*.class
+backend/.mvn/wrapper/
+backend/.mvn/
+backend/.idea/
+backend/*.jar
+backend/*.war
+backend/.DS_Store
+backend/logs/
+backend/*.log
+
+# AI Layer (Python)
+ai-layer/__pycache__/
+ai-layer/*.py[cod]
+ai-layer/*$py.class
+ai-layer/.venv/
+ai-layer/venv/
+ai-layer/ENV/
+ai-layer/.env
+ai-layer/.conda/
+ai-layer/dist/
+ai-layer/build/
+ai-layer/*.egg-info/
+ai-layer/.pytest_cache/
+ai-layer/.coverage
+ai-layer/htmlcov/
+
+# Common
+common/lib/
+common/.DS_Store
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Custom
+*.swp
+*.swo
+*~
