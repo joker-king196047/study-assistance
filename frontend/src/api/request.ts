@@ -3,7 +3,6 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
 
 const service: AxiosInstance = axios.create({
-  baseURL: '/api',
   timeout: 30000
 })
 
