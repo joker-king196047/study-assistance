@@ -2,17 +2,40 @@
   <div class="login-container">
     <el-card class="login-card">
       <template #header>
-        <h2>学习辅助系统</h2>
+        <div class="card-header">
+          <h2>登录</h2>
+          <p>欢迎回来</p>
+        </div>
       </template>
       <el-form :model="loginForm" :rules="rules" ref="formRef">
         <el-form-item prop="username">
-          <el-input v-model="loginForm.username" placeholder="用户名" prefix-icon="User" />
+          <el-input 
+            v-model="loginForm.username" 
+            placeholder="用户名" 
+            prefix-icon="User"
+            size="large"
+          />
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="loginForm.password" type="password" placeholder="密码" prefix-icon="Lock" show-password />
+          <el-input 
+            v-model="loginForm.password" 
+            type="password" 
+            placeholder="密码" 
+            prefix-icon="Lock" 
+            show-password
+            size="large"
+          />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" style="width: 100%" @click="handleLogin" :loading="loading">登录</el-button>
+          <el-button 
+            type="primary" 
+            size="large"
+            style="width: 100%" 
+            @click="handleLogin" 
+            :loading="loading"
+          >
+            登录
+          </el-button>
         </el-form-item>
       </el-form>
       <div class="footer">
@@ -25,12 +48,13 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { ElMessage } from 'element-plus'
 import type { FormInstance } from 'element-plus'
 
 const router = useRouter()
+const route = useRoute()
 const userStore = useUserStore()
 
 const loginForm = reactive({
@@ -54,9 +78,10 @@ const handleLogin = async () => {
       try {
         await userStore.login(loginForm)
         ElMessage.success('登录成功')
-        router.push('/home')
+        const redirect = (route.query.redirect as string) || '/home'
+        router.push(redirect)
       } catch (error) {
-        ElMessage.error('登录失败')
+        ElMessage.error('登录失败，请检查用户名和密码')
       } finally {
         loading.value = false
       }
@@ -79,9 +104,24 @@ const handleLogin = async () => {
   width: 400px;
 }
 
+.card-header {
+  text-align: center;
+}
+
+.card-header h2 {
+  margin: 0 0 5px;
+}
+
+.card-header p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
 .footer {
   text-align: center;
   font-size: 14px;
+  margin-top: 10px;
 }
 
 .footer a {

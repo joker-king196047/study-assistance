@@ -2,23 +2,58 @@
   <div class="register-container">
     <el-card class="register-card">
       <template #header>
-        <h2>用户注册</h2>
+        <div class="card-header">
+          <h2>注册</h2>
+          <p>创建您的账号</p>
+        </div>
       </template>
       <el-form :model="registerForm" :rules="rules" ref="formRef">
         <el-form-item prop="username">
-          <el-input v-model="registerForm.username" placeholder="用户名" prefix-icon="User" />
+          <el-input 
+          v-model="registerForm.username" 
+          placeholder="用户名" 
+          prefix-icon="User"
+          size="large"
+          />
         </el-form-item>
         <el-form-item prop="email">
-          <el-input v-model="registerForm.email" placeholder="邮箱" prefix-icon="Message" />
+          <el-input 
+          v-model="registerForm.email" 
+          placeholder="邮箱" 
+          prefix-icon="Message"
+          size="large"
+          />
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="registerForm.password" type="password" placeholder="密码" prefix-icon="Lock" show-password />
+          <el-input 
+          v-model="registerForm.password" 
+          type="password" 
+          placeholder="密码" 
+          prefix-icon="Lock" 
+          show-password
+          size="large"
+          />
         </el-form-item>
         <el-form-item prop="confirmPassword">
-          <el-input v-model="registerForm.confirmPassword" type="password" placeholder="确认密码" prefix-icon="Lock" show-password />
+          <el-input 
+          v-model="registerForm.confirmPassword" 
+          type="password" 
+          placeholder="确认密码" 
+          prefix-icon="Lock" 
+          show-password
+          size="large"
+          />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" style="width: 100%" @click="handleRegister" :loading="loading">注册</el-button>
+          <el-button 
+          type="primary" 
+          size="large"
+          style="width: 100%" 
+          @click="handleRegister" 
+          :loading="loading"
+          >
+            注册
+          </el-button>
         </el-form-item>
       </el-form>
       <div class="footer">
@@ -54,7 +89,10 @@ const validateConfirmPassword = (rule: any, value: any, callback: any) => {
 }
 
 const rules = {
-  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  username: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 3, max: 20, message: '用户名长度应在3-20个字符之间', trigger: 'blur' }
+  ],
   email: [
     { required: true, message: '请输入邮箱', trigger: 'blur' },
     { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' }
@@ -109,9 +147,24 @@ const handleRegister = async () => {
   width: 400px;
 }
 
+.card-header {
+  text-align: center;
+}
+
+.card-header h2 {
+  margin: 0 0 5px;
+}
+
+.card-header p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
 .footer {
   text-align: center;
   font-size: 14px;
+  margin-top: 10px;
 }
 
 .footer a {
