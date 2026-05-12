@@ -26,6 +26,30 @@ const routes: RouteRecordRaw[] = [
     name: 'Register',
     component: () => import('@/views/Register.vue'),
     meta: { requiresAuth: false }
+  },
+  {
+    path: '/profile/start',
+    name: 'ProfileFlow',
+    component: () => import('@/views/profile/ProfileFlow.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/profile/global-setup',
+    name: 'GlobalProfileSetup',
+    component: () => import('@/views/profile/GlobalProfileSetup.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/profile/direction-select',
+    name: 'DirectionSelect',
+    component: () => import('@/views/profile/DirectionSelect.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/profile/local-setup/:directionId',
+    name: 'LocalProfileSetup',
+    component: () => import('@/views/profile/LocalProfileSetup.vue'),
+    meta: { requiresAuth: true }
   }
 ]
 
