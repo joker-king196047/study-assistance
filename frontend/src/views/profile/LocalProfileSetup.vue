@@ -70,7 +70,8 @@
           <div class="question-section">
             <h4>1. 短期目标（1-3个月）</h4>
             <el-input
-              v-model="formData.learningGoals?.shortTerm?.description"
+              :model-value="formData.learningGoals?.shortTerm?.description"
+              @update:model-value="(val: string) => { if (formData.learningGoals!.shortTerm) formData.learningGoals!.shortTerm.description = val }"
               type="textarea"
               :rows="3"
               placeholder="例如：掌握Vue3全家桶，完成2个实战项目"
@@ -83,7 +84,7 @@
                 format="YYYY-MM-DD"
                 value-format="YYYY-MM-DD"
               />
-              <el-select v-model="formData.learningGoals?.shortTerm?.targetLevel" placeholder="目标水平">
+              <el-select :model-value="formData.learningGoals?.shortTerm?.targetLevel" @update:model-value="(val: string) => { if (formData.learningGoals!.shortTerm) formData.learningGoals!.shortTerm.targetLevel = val }" placeholder="目标水平">
                 <el-option label="入门" value="入门" />
                 <el-option label="初级" value="初级" />
                 <el-option label="中级" value="中级" />
@@ -96,13 +97,15 @@
           <div class="question-section">
             <h4>2. 中期目标（3-6个月）</h4>
             <el-input
-              v-model="formData.learningGoals?.midTerm?.description"
+              :model-value="formData.learningGoals?.midTerm?.description"
+              @update:model-value="(val: string) => { if (formData.learningGoals!.midTerm) formData.learningGoals!.midTerm.description = val }"
               type="textarea"
               :rows="3"
               placeholder="例如：成为能够独立开发完整应用的前端工程师"
             />
             <el-input-number
-              v-model="formData.learningGoals?.midTerm?.projectsPlan"
+              :model-value="formData.learningGoals?.midTerm?.projectsPlan"
+              @update:model-value="(val: number) => { if (formData.learningGoals!.midTerm) formData.learningGoals!.midTerm.projectsPlan = val }"
               :min="1"
               :max="20"
               placeholder="计划完成项目数"
@@ -113,13 +116,15 @@
           <div class="question-section">
             <h4>3. 长期目标（6个月以上）</h4>
             <el-input
-              v-model="formData.learningGoals?.longTerm?.description"
+              :model-value="formData.learningGoals?.longTerm?.description"
+              @update:model-value="(val: string) => { if (formData.learningGoals!.longTerm) formData.learningGoals!.longTerm.description = val }"
               type="textarea"
               :rows="3"
               placeholder="例如：成为高级前端工程师，向全栈发展"
             />
             <el-input
-              v-model="formData.learningGoals?.longTerm?.careerTarget"
+              :model-value="formData.learningGoals?.longTerm?.careerTarget"
+              @update:model-value="(val: string) => { if (formData.learningGoals!.longTerm) formData.learningGoals!.longTerm.careerTarget = val }"
               placeholder="职业目标，例如：前端架构师"
               style="margin-top: 16px;"
             />

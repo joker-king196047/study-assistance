@@ -195,7 +195,7 @@
             <div class="rating-grid">
               <div v-for="item in selfRatingItems" :key="item.key" class="rating-item">
                 <span class="rating-label">{{ item.label }}</span>
-                <el-slider v-model="formData.personalTraits.selfAssessment?.[item.key]" :min="0" :max="100" show-input />
+                <el-slider :model-value="formData.personalTraits?.selfAssessment?.[item.key] ?? 50" @update:model-value="(val: number) => { if (formData.personalTraits!.selfAssessment) formData.personalTraits!.selfAssessment[item.key] = val }" :min="0" :max="100" show-input />
               </div>
             </div>
           </div>

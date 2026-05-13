@@ -12,15 +12,15 @@
           <div 
             class="nav-item" 
             :class="{ active: activeTab === 'home' }"
-            @click="activeTab = 'home'"
+            @click="activeTab = 'home'; $router.push('/home')"
           >
             <el-icon><House /></el-icon>
             <span>首页</span>
           </div>
           <div 
             class="nav-item" 
-            :class="{ active: activeTab === 'questions' }"
-            @click="activeTab = 'questions'"
+            :class="{ active: $route.path.startsWith('/question-bank') }"
+            @click="$router.push('/question-bank')"
           >
             <el-icon><Reading /></el-icon>
             <span>题库</span>
@@ -86,7 +86,7 @@
               <h3>继续学习</h3>
               <p>从上次结束的地方继续</p>
             </div>
-            <div class="action-card" @click="handleAction('practice')">
+            <div class="action-card" @click="$router.push('/question-bank')">
               <div class="action-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
                 <el-icon :size="32" color="#fff"><Edit /></el-icon>
               </div>

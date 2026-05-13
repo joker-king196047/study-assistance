@@ -1,0 +1,38 @@
+study/
+├── frontend/          ← 前端（用户看到的网页）
+│   ├── src/
+│   │   ├── api/       ← 传话员（和后端对话）
+│   │   ├── views/     ← 页面（登录页、注册页、首页等）
+│   │   ├── stores/    ← 仓库（存用户登录状态等）
+│   │   └── router/    ← 导航（控制页面跳转）
+│   └── package.json   ← 前端「购物清单」（依赖包）
+│
+├── backend/           ← 后端（服务器程序）
+│   ├── src/main/java/com/study/
+│   │   ├── controller/← 接待员（接收前端请求）
+│   │   ├── service/   ← 办事员（处理业务逻辑）
+│   │   ├── entity/    ← 数据模型（数据库表的结构）
+│   │   └── mapper/    ← 数据库管理员（读写数据库）
+│   └── pom.xml        ← 后端「购物清单」（依赖包）
+
+
+### 前端技术栈
+技术 作用 生活比喻
+Vue 3 构建网页界面的框架 盖房子的脚手架 
+TypeScript 给 JavaScript 加类型检查 写代码时的「语法纠错器」 
+Vite 快速启动和打包前端项目 快速启动器 
+Element Plus 现成的 UI 组件库（按钮、表单、弹窗等） 装修用的「成品家具」 
+Pinia 管理全局状态（比如用户登录信息）
+公共储物柜 Vue Router 控制页面跳转 
+导航地图 Axios 发 HTTP 请求和后端通信 快递员
+
+
+### 后端技术栈
+技术 作用 生活比喻 
+Spring Boot Java 后端框架，快速搭建服务器 后厨的「万能工作台」 
+Spring Security 安全认证（登录验证） 门卫保安 
+JPA 操作数据库的工具 数据库翻译官 
+H2 内存数据库（重启数据清空） 临时记事本 
+JWT 生成登录 Token 门禁卡 
+Lombok 自动生成 getter/setter 代码自动生成器
+
