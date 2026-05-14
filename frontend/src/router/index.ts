@@ -50,24 +50,6 @@ const routes: RouteRecordRaw[] = [
     name: 'LocalProfileSetup',
     component: () => import('@/views/profile/LocalProfileSetup.vue'),
     meta: { requiresAuth: true }
-  },
-  {
-    path: '/question-bank',
-    name: 'QuestionBank',
-    component: () => import('@/views/questionBank/QuestionBank.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/question-bank/problems',
-    name: 'ProblemList',
-    component: () => import('@/views/questionBank/ProblemList.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/question-bank/problem/:pid',
-    name: 'ProblemDetail',
-    component: () => import('@/views/questionBank/ProblemDetail.vue'),
-    meta: { requiresAuth: true }
   }
 ]
 

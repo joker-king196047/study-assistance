@@ -1,0 +1,361 @@
+openapi: 3.0.3
+info:
+  title: 洛谷开放平台 API
+  description: 使用洛谷开放平台，实现云端评测等功能。
+  version: 1.0.0
+servers:
+  - url: https://open-v1.lgapi.cn
+components:
+  securitySchemes:
+    api:
+      type: http
+      scheme: basic
+  schemas:
+    AsyncRequestCommon:
+      type: object
+      properties:
+        trackId:
+          type: string
+          maxLength: 64
+          required: false
+          description: 由 OpenApp 定义，这里的内容会原封不动地在结果中返回。
+    AsyncResponseCommon:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Request ID, 用来查询请求结果
+          example: 1BwHdxEa4LTFnL619bxRwC
+    AsyncResultCommon:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: 异步请求的 ID，在提交时返回给 OpenApp。
+          example: 1BwHdxEa4LTFnL619bxRwC
+        trackId:
+          type: string
+          description: 在提交请求时填写，会原样返回。
+    GeneralErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          description: 错误代码，与 HTTP Status 相同
+          example: 400
+        errorType:
+          type: string
+          description: 错误类型
+          example: Lentille\SymfonyBundle\Exception\FormErrorException
+        errorMessage:
+          type: integer
+          description: 错误信息
+          example: Form is not valid.
+        errorData:
+          type: object
+          description: 错误相关数据，根据 errorType 的不同而变化
+    LentilleFormError:
+      type: object
+      properties:
+        lentilleFormError:
+          type: number
+          enum:
+            - 1
+          description: 恒为 1，标识此为 LentilleFormError
+          example: 1
+        submitted:
+          type: boolean
+          description: 表单提交是否成功
+          example: true
+        valid:
+          type: boolean
+          description: 表单校验是否成功
+          example: false
+        fields:
+          type: array
+          description: 表单出错的字段
+          items:
+            properties:
+              name:
+                type: string
+                description: 出错字段名
+                example: lang
+              value:
+                type: string
+                description: 出错字段值
+                example: cxx
+              message:
+                type: string
+                description: 出错字段信息
+                example: cxx is not a valid language
+    WebSocketQueryParam:
+      type: object
+      properties:
+        token:
+          type: string
+          description: OpenApp Token
+          example: 01gt8s4bnbesna15e9f6wvk5pn:w1MmbjBCsDYjXpgS
+        channel:
+          type: string
+          description: 要订阅的频道列表，只有订阅了相应频道才会收到相应推送。多个频道以半角逗号分隔。
+          example: judge.result,some-other-example-channel
+    JudgeRequestCommon:
+      type: object
+      properties:
+        lang:
+          type: string
+          description: 代码语言，见语言支持列表
+          example: cxx/14/gcc
+          required: true
+        o2:
+          type: boolean
+          description: |
+            打开 `-O2`（或类似的）编译优化开关
+
+            但不一定真的会开，受到题目限制，即使这里传入 false 也可能是打开的，反之亦然。
+
+            到底有无使用 O2 编译优化需要查询编译结果中的返回。
+          required: true
+        code:
+          type: string
+          description: 要评测的代码
+          required: true
+          example: |
+            #include <stdio.h>
+            int main() {
+                int a,b;
+                scanf("%d%d",&a,&b);
+                printf("%d\n", a+b);
+                return 0;
+            }
+    JudgeProblem:
+      description: 使用洛谷题库评测代码
+      type: object
+      allOf:
+        - type: object
+          properties:
+            pid:
+              type: string
+              description: 题目 PID
+              example: P1001
+              required: true
+        - $ref: '#/components/schemas/JudgeRequestCommon'
+        - $ref: '#/components/schemas/AsyncRequestCommon'
+    JudgeType:
+      description: 评测执行类型
+      type: string
+      enum:
+        - judge
+    CompileResult:
+      description: 编译结果
+      type: object
+      properties:
+        success:
+          description: 编译是否成功
+          type: boolean
+        message:
+          description: 编译器返回信息
+          type: string
+          example: >
+            /tmp/compiler_y2u2icgr/src: 在函数‘void dfs(int, int, char, int)’中:
+
+            /tmp/compiler_y2u2icgr/src:28:16: 警告：数组下标类型为‘char’
+            [-Wchar-subscripts]
+                move_to(psw[wy]);
+                            ^
+        opt2:
+          description: 编译时是否打开 `O2`（或类似的）优化开关
+          type: boolean
+    JudgeStatus:
+      type: integer
+      description: |
+        评测结果、子任务、测试点的状态。
+        - 0, Waiting, 任务等待执行
+        - 1, Judging, 评测中
+        - 2, Compile Error, 编译失败
+        - 3, Output Limit Exceeded, 输出超限
+        - 4, Memory Limit Exceeded, 内存超限
+        - 5, Time Limit Exceeded, 运行时间超限
+        - 6, Wrong Answer, 答案错误
+        - 7, Runtime Error, 运行时错误
+        - 11, Invalid, 结果非法（一般是内部错误等，可以反馈）
+        - 12, Accepted, 结果正确、评测通过
+        - 14, Overall Unaccepted, 评测不通过（评测结果、子任务中使用，根据计分方式返回的评测失败）
+    ScoringResult:
+      description: 计分结果，是评测结果、子任务结果、测试点结果的抽象。
+      type: object
+      properties:
+        id:
+          type: integer
+        status:
+          $ref: '#/components/schemas/JudgeStatus'
+        score:
+          type: integer
+          description: 得分
+        time:
+          type: integer
+          description: 运行时使用的时间（毫秒，ms）
+        memory:
+          type: integer
+          description: 运行时使用的空间（内存，千字节，KiB）
+    JudgeRecord:
+      description: 评测记录
+      type: object
+      properties:
+        compile:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/CompileResult'
+        judge:
+          description: 评测结果，如果为 null 则表示结果还没有生成。如果 status 为 Waiting 或 Judging，则评测还没完成。
+          nullable: true
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/ScoringResult'
+            - type: object
+              properties:
+                subtasks:
+                  description: 子任务结果列表
+                  type: array
+                  items:
+                    allOf:
+                      - $ref: '#/components/schemas/ScoringResult'
+                      - type: object
+                        properties:
+                          cases:
+                            description: 测试点结果列表
+                            type: array
+                            items:
+                              allOf:
+                                - $ref: '#/components/schemas/ScoringResult'
+                                - type: object
+                                  properties:
+                                    signal:
+                                      description: 程序退出时的信号，非 0 一般为异常
+                                      type: integer
+                                    exitCode:
+                                      description: 程序退出时的返回值，非 0 一般为非正常结束
+                                      type: integer
+                                    description:
+                                      description: 对测试点结果的描述
+                                      type: string
+                                      nullable: true
+    JudgeCallback:
+      description: |
+        评测接口执行结果
+
+        无论是主动请求结果 API 还是使用 HTTP callback 或 WebSocket 等消息通知渠道获取结果，其值均遵守此结构。
+      type: object
+      allOf:
+        - type: object
+          properties:
+            type:
+              $ref: '#/components/schemas/JudgeType'
+            data:
+              $ref: '#/components/schemas/JudgeRecord'
+        - $ref: '#/components/schemas/AsyncResultCommon'
+tags:
+  - name: 评测
+    description: 提交代码以使用洛谷题库评测
+  - name: 查询
+    description: 查询开放平台账户状态
+paths:
+  /judge/problem:
+    post:
+      summary: 提交题库评测
+      description: |
+        提交代码，洛谷将使用洛谷题库测试数据和评测资源对代码的正确性进行评判。
+
+        这是异步请求，执行结果关联的 WebSocket 通知频道为 `judge.result`。
+      tags:
+        - 评测
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JudgeProblem'
+      responses:
+        '200':
+          description: 提交成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponseCommon'
+        '402':
+          description: 额度不足，没有足够的配额来完成请求，需要充值
+  /judge/result:
+    get:
+      summary: 查询评测结果
+      description: |
+        使用提交评测时获得的 Request ID 查询评测结果。评测结果只会缓存 1 小时，如果使用轮询获取结果请及时查询。
+      tags:
+        - 评测
+      parameters:
+        - name: id
+          in: path
+          description: Request ID, 于提交时获得
+          required: true
+          example: 1BwHdxEa4LTFnL619bxRwC
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 评测已经完成或已有部分评测结果，返回评测结果
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JudgeCallback'
+        '204':
+          description: 评测尚未完成，还没有任何结果产生
+  /judge/quotaAvailable:
+    get:
+      summary: 查询账户评测可用计费点
+      description: 查询当前账户的评测可用计费点情况
+      tags:
+        - 查询
+        - 评测
+      responses:
+        '200':
+          description: 查询成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  quotas:
+                    type: array
+                    description: 可用计费点列表
+                    items:
+                      type: object
+                      properties:
+                        availablePoints:
+                          type: integer
+                          description: 可用计费点
+                          example: 30000
+                        createTime:
+                          type: integer
+                          description: 计费点创建时间
+                          format: int64
+                          example: 1697620471
+                        validAfter:
+                          type: integer
+                          description: 计费点生效时间
+                          format: int64
+                          example: 1713542400
+                        expireTime:
+                          type: integer
+                          description: 计费点过期时间
+                          format: int64
+                          example: 1721491199
+                        points:
+                          type: object
+                          description: 计费套餐详情
+                          properties:
+                            max:
+                              type: integer
+                              description: 套餐最大计费点
+                              example: 30000
+                            used:
+                              type: integer
+                              description: 已使用计费点
+                              example: 0

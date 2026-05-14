@@ -31,16 +31,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
-            String username = jwtUtils.extractUsername(token);
+            try {
+                String username = jwtUtils.extractUsername(token);
 
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                if (jwtUtils.validateToken(token)) {
-                    UserDetails userDetails = new User(username, "", Collections.emptyList());
-                    UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    if (jwtUtils.validateToken(token)) {
+                        UserDetails userDetails = new User(username, "", Collections.emptyList());
+                        UsernamePasswordAuthenticationToken authentication =
+                                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
+                    }
                 }
+            } catch (Exception e) {
+                // Token invalid or expired - continue without authentication
+                // For permitAll endpoints, the request will still be allowed through
             }
         }
 
