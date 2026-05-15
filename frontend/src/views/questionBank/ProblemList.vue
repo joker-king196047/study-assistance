@@ -1,120 +1,124 @@
 <template>
-  <div class="problem-list-page">
-    <div class="page-header">
-      <div class="back-btn" @click="$router.push('/question-bank')">
-        <el-icon><ArrowLeft /></el-icon>
-        <span>返回课程列表</span>
-      </div>
-      <h1>{{ bankDetail?.bank?.name || '题目列表' }}</h1>
-      <p>{{ bankDetail?.bank?.description }}</p>
-    </div>
-
-    <div v-if="loading" class="loading-state">
-      <el-icon :size="32" class="is-loading"><Loading /></el-icon>
-      <p>正在加载...</p>
-    </div>
-
-    <template v-else>
-      <div class="type-selector" v-if="bankDetail">
-        <div class="type-label">选择题型</div>
-        <div class="type-options">
-          <div
-            class="type-chip"
-            :class="{ active: selectedType === '' }"
-            @click="selectType('')"
-          >
-            全部题目
-            <span class="type-count">{{ bankDetail.totalQuestions }}</span>
-          </div>
-          <div
-            v-if="bankDetail.singleCount > 0"
-            class="type-chip"
-            :class="{ active: selectedType === 'single' }"
-            @click="selectType('single')"
-          >
-            单选题
-            <span class="type-count">{{ bankDetail.singleCount }}</span>
-          </div>
-          <div
-            v-if="bankDetail.multipleCount > 0"
-            class="type-chip"
-            :class="{ active: selectedType === 'multiple' }"
-            @click="selectType('multiple')"
-          >
-            多选题
-            <span class="type-count">{{ bankDetail.multipleCount }}</span>
-          </div>
-          <div
-            v-if="bankDetail.judgeCount > 0"
-            class="type-chip"
-            :class="{ active: selectedType === 'judge' }"
-            @click="selectType('judge')"
-          >
-            判断题
-            <span class="type-count">{{ bankDetail.judgeCount }}</span>
-          </div>
-          <div
-            v-if="bankDetail.fillCount > 0"
-            class="type-chip"
-            :class="{ active: selectedType === 'fill' }"
-            @click="selectType('fill')"
-          >
-            填空题
-            <span class="type-count">{{ bankDetail.fillCount }}</span>
-          </div>
-          <div
-            v-if="bankDetail.essayCount > 0"
-            class="type-chip"
-            :class="{ active: selectedType === 'essay' }"
-            @click="selectType('essay')"
-          >
-            解答题
-            <span class="type-count">{{ bankDetail.essayCount }}</span>
-          </div>
+  <MainLayout>
+    <div class="problem-list-page">
+      <div class="page-header">
+        <div class="back-btn" @click="$router.push('/question-bank')">
+          <el-icon><ArrowLeft /></el-icon>
+          <span>返回课程列表</span>
         </div>
+        <h1>{{ bankDetail?.bank?.name || '题目列表' }}</h1>
+        <p>{{ bankDetail?.bank?.description }}</p>
       </div>
 
-      <div class="question-list" v-if="questions.length > 0">
-        <div
-          v-for="(q, index) in questions"
-          :key="q.id"
-          class="question-card"
-          @click="goToQuestion(q)"
-        >
-          <div class="question-index">{{ index + 1 }}</div>
-          <div class="question-body">
-            <div class="question-meta">
-              <span class="type-tag" :class="q.type">{{ typeLabel(q.type) }}</span>
-              <span class="difficulty-tag" :class="q.difficulty">{{ difficultyLabel(q.difficulty) }}</span>
-              <span class="score-tag">{{ q.score }}分</span>
+      <div v-if="loading" class="loading-state">
+        <el-icon :size="32" class="is-loading"><Loading /></el-icon>
+        <p>正在加载...</p>
+      </div>
+
+      <template v-else>
+        <div class="type-selector" v-if="bankDetail">
+          <div class="type-label">选择题型</div>
+          <div class="type-options">
+            <div
+              class="type-chip"
+              :class="{ active: selectedType === '' }"
+              @click="selectType('')"
+            >
+              全部题目
+              <span class="type-count">{{ bankDetail.totalQuestions }}</span>
             </div>
-            <h3 class="question-content">{{ q.content }}</h3>
-          </div>
-          <div class="question-action">
-            <el-button type="primary" size="small" @click.stop="goToQuestion(q)">
-              {{ q.type === 'essay' ? '开始作答' : '开始答题' }}
-            </el-button>
+            <div
+              v-if="bankDetail.singleCount > 0"
+              class="type-chip"
+              :class="{ active: selectedType === 'single' }"
+              @click="selectType('single')"
+            >
+              单选题
+              <span class="type-count">{{ bankDetail.singleCount }}</span>
+            </div>
+            <div
+              v-if="bankDetail.multipleCount > 0"
+              class="type-chip"
+              :class="{ active: selectedType === 'multiple' }"
+              @click="selectType('multiple')"
+            >
+              多选题
+              <span class="type-count">{{ bankDetail.multipleCount }}</span>
+            </div>
+            <div
+              v-if="bankDetail.judgeCount > 0"
+              class="type-chip"
+              :class="{ active: selectedType === 'judge' }"
+              @click="selectType('judge')"
+            >
+              判断题
+              <span class="type-count">{{ bankDetail.judgeCount }}</span>
+            </div>
+            <div
+              v-if="bankDetail.fillCount > 0"
+              class="type-chip"
+              :class="{ active: selectedType === 'fill' }"
+              @click="selectType('fill')"
+            >
+              填空题
+              <span class="type-count">{{ bankDetail.fillCount }}</span>
+            </div>
+            <div
+              v-if="bankDetail.essayCount > 0"
+              class="type-chip"
+              :class="{ active: selectedType === 'essay' }"
+              @click="selectType('essay')"
+            >
+              解答题
+              <span class="type-count">{{ bankDetail.essayCount }}</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div v-else class="empty-state">
-        <el-icon :size="64" color="#ddd"><Document /></el-icon>
-        <p>暂无该类型的题目</p>
-      </div>
-    </template>
-  </div>
+        <div class="question-list" v-if="questions.length > 0">
+          <div
+            v-for="(q, index) in questions"
+            :key="q.id"
+            class="question-card"
+            @click="goToQuestion(q)"
+          >
+            <div class="question-index">{{ index + 1 }}</div>
+            <div class="question-body">
+              <div class="question-meta">
+                <span class="type-tag" :class="q.type">{{ typeLabel(q.type) }}</span>
+                <span class="difficulty-tag" :class="q.difficulty">{{ difficultyLabel(q.difficulty) }}</span>
+                <span class="score-tag">{{ q.score }}分</span>
+              </div>
+              <h3 class="question-content">{{ q.content }}</h3>
+            </div>
+            <div class="question-action">
+              <el-button type="primary" size="small" @click.stop="goToQuestion(q)">
+                {{ q.type === 'essay' ? '开始作答' : '开始答题' }}
+              </el-button>
+            </div>
+          </div>
+        </div>
+
+        <div v-else class="empty-state">
+          <el-icon :size="64" color="#ddd"><Document /></el-icon>
+          <p>暂无该类型的题目</p>
+        </div>
+      </template>
+    </div>
+  </MainLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getBankDetail, getQuestions, type BankDetail, type QuestionItem } from '@/api/questionBank'
+import MainLayout from '@/layouts/MainLayout.vue'
 import { ArrowLeft, Loading, Document } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const router = useRouter()
-const bankId = Number(route.params.bankId)
+const subCategory = route.query.subCategory as string
+const bankId = Number(subCategory.replace('bank-', ''))
 
 const bankDetail = ref<BankDetail | null>(null)
 const questions = ref<QuestionItem[]>([])
@@ -124,7 +128,7 @@ const loading = ref(true)
 onMounted(async () => {
   try {
     const detailRes = await getBankDetail(bankId)
-    bankDetail.value = (detailRes as any).data || detailRes as any
+    bankDetail.value = detailRes as any
     await loadQuestions()
   } catch (e) {
     console.error('加载失败', e)
@@ -142,7 +146,7 @@ function selectType(type: string) {
 async function loadQuestions() {
   try {
     const res = await getQuestions(bankId, selectedType.value || undefined)
-    questions.value = (res as any).data || res as any
+    questions.value = res as any
   } catch (e) {
     console.error('获取题目失败', e)
   }

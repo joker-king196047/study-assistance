@@ -1,0 +1,502 @@
+[
+  {
+    "id": 1,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "在编程中，三元运算符通常用什么符号定义？",
+    "options": "[\"?\", \"?:\", \"if then\", \"??\"]",
+    "answer": "?:",
+    "explanation": "计算机科学基础",
+    "score": 20
+  },
+  {
+    "id": 2,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "Gmail首次推出时，提供多少存储空间？",
+    "options": "[\"无限\", \"1GB\", \"512MB\", \"5GB\"]",
+    "answer": "1GB",
+    "explanation": "计算机科学基础",
+    "score": 10
+  },
+  {
+    "id": 3,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "在大多数编程语言中，运算符 ++ 等同于语句 \"+= 1\"。",
+    "options": "[\"对\", \"错\"]",
+    "answer": "对",
+    "explanation": "计算机科学基础",
+    "score": 10
+  },
+  {
+    "id": 4,
+    "type": "judge",
+    "difficulty": "medium",
+    "question": "Raspberry Pi 系列单板计算机是在美国创建的。",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "计算机科学基础",
+    "score": 20
+  },
+  {
+    "id": 5,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "世嘉Mega Drive / Sega Genesis的主CPU是什么？",
+    "options": "[\"Yamaha YM2612\", \"Zilog Z80\", \"Motorola 68000\", \"Intel 8088\"]",
+    "answer": "Motorola 68000",
+    "explanation": "计算机科学基础",
+    "score": 20
+  },
+  {
+    "id": 6,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "FILO适用于哪种数据结构？",
+    "options": "[\"栈\", \"树\", \"队列\", \"堆\"]",
+    "answer": "栈",
+    "explanation": "数据结构",
+    "score": 30
+  },
+  {
+    "id": 7,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "Palantir的创始人是谁？",
+    "options": "[\"Peter Thiel\", \"Jack Dorsey\", \"Marc Benioff\", \"Mark Zuckerberg\"]",
+    "answer": "Peter Thiel",
+    "explanation": "计算机科学基础",
+    "score": 30
+  },
+  {
+    "id": 8,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "哪家互联网公司最初是一家名为'Cadabra'的网上书店？",
+    "options": "[\"Amazon\", \"Overstock\", \"Shopify\", \"eBay\"]",
+    "answer": "Amazon",
+    "explanation": "计算机科学基础",
+    "score": 20
+  },
+  {
+    "id": 9,
+    "type": "judge",
+    "difficulty": "medium",
+    "question": "AMD创造了第一款消费级64位处理器。",
+    "options": "[\"对\", \"错\"]",
+    "answer": "对",
+    "explanation": "计算机科学基础",
+    "score": 20
+  },
+  {
+    "id": 10,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "在网络中，OSPF代表什么？",
+    "options": "[\"Open Signal Path Finder\", \"Open Shortest Path First\", \"Order State Part First\", \"Order Sense Ping Find\"]",
+    "answer": "Open Shortest Path First",
+    "explanation": "网络基础",
+    "score": 10
+  },
+  {
+    "id": 11,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "在HTML中，哪个非标准标签曾用于使元素在视口中滚动？",
+    "options": "[\"<marquee></marquee>\", \"<scroll></scroll>\", \"<slide></slide>\", \"<move></move>\"]",
+    "answer": "<marquee></marquee>",
+    "explanation": "Web开发",
+    "score": 20
+  },
+  {
+    "id": 12,
+    "type": "judge",
+    "difficulty": "hard",
+    "question": "DHCP代表动态主机配置端口(Dynamic Host Configuration Port)。",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "DHCP代表动态主机配置协议(Dynamic Host Configuration Protocol)",
+    "score": 30
+  },
+  {
+    "id": 13,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "以下哪个不是Ubuntu发行版的官方开发代号？",
+    "options": "[\"Wily Werewolf\", \"Utopic Unicorn\", \"Mystic Mansion\", \"Trusty Tahr\"]",
+    "answer": "Mystic Mansion",
+    "explanation": "操作系统",
+    "score": 20
+  },
+  {
+    "id": 14,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "在许多3D建模应用中常见的茶壶被称为什么？",
+    "options": "[\"3D茶壶\", \"皮克斯茶壶\", \"田纳西茶壶\", \"犹他茶壶\"]",
+    "answer": "犹他茶壶",
+    "explanation": "计算机图形学",
+    "score": 20
+  },
+  {
+    "id": 15,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "CMOS是用于构建集成电路的技术。CMOS代表什么？",
+    "options": "[\"互补金属氧化物半导体\", \"计算机制造振荡静态\", \"互补磁性欧姆半导体\", \"计算机制造操作系统\"]",
+    "answer": "互补金属氧化物半导体",
+    "explanation": "硬件基础",
+    "score": 30
+  },
+  {
+    "id": 16,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "哪种编程语言是Sun Microsystems在1995年开发的？",
+    "options": "[\"Solaris OS\", \"C++\", \"Java\", \"Python\"]",
+    "answer": "Java",
+    "explanation": "编程语言",
+    "score": 20
+  },
+  {
+    "id": 17,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "Linus Torvalds创建了Linux和Git。",
+    "options": "[\"对\", \"错\"]",
+    "answer": "对",
+    "explanation": "开源软件",
+    "score": 10
+  },
+  {
+    "id": 18,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "编程语言AWK的名称是开发者名字Aho、Weinberger和Kernighan的缩写。",
+    "options": "[\"对\", \"错\"]",
+    "answer": "对",
+    "explanation": "编程语言",
+    "score": 10
+  },
+  {
+    "id": 19,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "以下哪项是日本富士通公司生产的个人电脑？",
+    "options": "[\"MSX\", \"Xmillennium\", \"PC-9801\", \"FM-7\"]",
+    "answer": "FM-7",
+    "explanation": "计算机历史",
+    "score": 20
+  },
+  {
+    "id": 20,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "SSD代表什么？",
+    "options": "[\"解决方案源磁盘\", \"源解决方案驱动器\", \"固态磁盘\", \"固态硬盘\"]",
+    "answer": "固态硬盘",
+    "explanation": "硬件基础",
+    "score": 10
+  },
+  {
+    "id": 21,
+    "type": "judge",
+    "difficulty": "medium",
+    "question": "常见的软件编程缩写\"I18N\"来自术语\"Interlocalization\"。",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "I18N来自Internationalization",
+    "score": 20
+  },
+  {
+    "id": 22,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "Tor匿名网络的名称最初代表什么？",
+    "options": "[\"The Only Router\", \"The Ominous Router\", \"The Onion Router\", \"The Orange Router\"]",
+    "answer": "The Onion Router",
+    "explanation": "网络安全",
+    "score": 20
+  },
+  {
+    "id": 23,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "哪种RAID阵列类型与数据镜像相关联？",
+    "options": "[\"RAID 5\", \"RAID 0\", \"RAID 1\", \"RAID 10\"]",
+    "answer": "RAID 1",
+    "explanation": "存储技术",
+    "score": 30
+  },
+  {
+    "id": 24,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "第一个专门针对平板电脑优化的Android版本是什么？",
+    "options": "[\"Eclair\", \"Froyo\", \"Honeycomb\", \"Marshmellow\"]",
+    "answer": "Honeycomb",
+    "explanation": "移动开发",
+    "score": 20
+  },
+  {
+    "id": 25,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "编程语言\"Python\"是基于\"JavaScript\"的修改版本。",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "编程语言",
+    "score": 10
+  },
+  {
+    "id": 26,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "通常多少位等于一个字节？",
+    "options": "[\"64\", \"8\", \"1\", \"2\"]",
+    "answer": "8",
+    "explanation": "计算机基础",
+    "score": 10
+  },
+  {
+    "id": 27,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "单精度浮点数的尾数部分由多少位组成？",
+    "options": "[\"8\", \"15\", \"53\", \"23\"]",
+    "answer": "23",
+    "explanation": "计算机基础",
+    "score": 20
+  },
+  {
+    "id": 28,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "2001年发布的苹果Mac OS X操作系统第一版（版本10.0）的动物代号是什么？",
+    "options": "[\"Puma\", \"Cheetah\", \"Tiger\", \"Leopard\"]",
+    "answer": "Cheetah",
+    "explanation": "操作系统",
+    "score": 30
+  },
+  {
+    "id": 29,
+    "type": "judge",
+    "difficulty": "medium",
+    "question": "开源程序Redis是一个关系型数据库服务器。",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "Redis是键值存储数据库",
+    "score": 20
+  },
+  {
+    "id": 30,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "使用两位经典信息发送一位量子信息的过程叫什么名字？",
+    "options": "[\"量子纠缠\", \"量子隐形传态\", \"超密编码\", \"量子编程\"]",
+    "answer": "量子隐形传态",
+    "explanation": "量子计算",
+    "score": 30
+  },
+  {
+    "id": 31,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "最初用于PCM适配器的CD数字音频格式的标准采样频率是多少？",
+    "options": "[\"32.0 kHz\", \"20.5 kHz\", \"44.1 kHz\", \"1.5 MHz\"]",
+    "answer": "44.1 kHz",
+    "explanation": "多媒体技术",
+    "score": 20
+  },
+  {
+    "id": 32,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "IPv6地址有多长？",
+    "options": "[\"32位\", \"128位\", \"128字节\", \"64位\"]",
+    "answer": "128位",
+    "explanation": "网络基础",
+    "score": 10
+  },
+  {
+    "id": 33,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "Node.js使用什么语言？",
+    "options": "[\"JavaScript\", \"Java Source\", \"Java\", \"Joomla Source Code\"]",
+    "answer": "JavaScript",
+    "explanation": "Web开发",
+    "score": 10
+  },
+  {
+    "id": 34,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "哪个计算机硬件设备为所有其他连接设备提供通信接口？",
+    "options": "[\"中央处理器\", \"随机存取存储器\", \"主板\", \"硬盘驱动器\"]",
+    "answer": "主板",
+    "explanation": "硬件基础",
+    "score": 10
+  },
+  {
+    "id": 35,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "在软件市场中，LTS代表什么？",
+    "options": "[\"Ludicrous Transfer Speed\", \"Ludicrous Turbo Speed\", \"长期支持\", \"Long Taco Service\"]",
+    "answer": "长期支持",
+    "explanation": "软件开发",
+    "score": 10
+  },
+  {
+    "id": 36,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "以下哪项不是计算机科学算法？",
+    "options": "[\"归并排序\", \"浮点排序\", \"冒泡排序\", \"快速排序\"]",
+    "answer": "浮点排序",
+    "explanation": "算法基础",
+    "score": 30
+  },
+  {
+    "id": 37,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "在Twitter上，一条Tweet的原始字符限制是多少？",
+    "options": "[\"120\", \"100\", \"160\", \"140\"]",
+    "answer": "140",
+    "explanation": "互联网服务",
+    "score": 10
+  },
+  {
+    "id": 38,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "联想在哪一年收购了IBM的个人电脑部门，包括ThinkPad系列笔记本电脑和平板电脑？",
+    "options": "[\"2008\", \"2005\", \"2002\", \"1999\"]",
+    "answer": "2005",
+    "explanation": "计算机历史",
+    "score": 30
+  },
+  {
+    "id": 39,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "Android 4.3的名称是什么？",
+    "options": "[\"Froyo\", \"Lollipop\", \"Nutella\", \"Jelly Bean\"]",
+    "answer": "Jelly Bean",
+    "explanation": "移动开发",
+    "score": 20
+  },
+  {
+    "id": 40,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "以下哪项是2014年4月在公开可用的OpenSSL加密库中发现的漏洞名称？",
+    "options": "[\"Shellscript\", \"Shellshock\", \"Heartbleed\", \"Corrupted Blood\"]",
+    "answer": "Heartbleed",
+    "explanation": "网络安全",
+    "score": 30
+  },
+  {
+    "id": 41,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "以下哪项不是敏捷软件开发的核心价值观？",
+    "options": "[\"个体和互动\", \"客户协作\", \"全面文档\", \"响应变化\"]",
+    "answer": "全面文档",
+    "explanation": "软件开发方法论",
+    "score": 30
+  },
+  {
+    "id": 42,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "摩尔定律最初指出，微处理器芯片上的晶体管数量每...翻一番。",
+    "options": "[\"八年\", \"四年\", \"两年\", \"一年\"]",
+    "answer": "一年",
+    "explanation": "计算机科学基础",
+    "score": 20
+  },
+  {
+    "id": 43,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "颜色模型CMYK代表什么？",
+    "options": "[\"青色、品红色、黄色和卡其色\", \"奶油色、栗色、黄色和黑色\", \"青色、品红色、黄色和黑色\", \"奶油色、栗色、黄色和卡其色\"]",
+    "answer": "青色、品红色、黄色和黑色",
+    "explanation": "图形设计",
+    "score": 10
+  },
+  {
+    "id": 44,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "在标准美式QWERTY键盘上，按住Shift键并按1会输入什么符号？",
+    "options": "[\"百分号\", \"美元符号\", \"星号\", \"感叹号\"]",
+    "answer": "感叹号",
+    "explanation": "计算机基础",
+    "score": 10
+  },
+  {
+    "id": 45,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "计算机软件缩写JVM代表什么？",
+    "options": "[\"Java Vendor Machine\", \"Java Visual Machine\", \"Just Virtual Machine\", \"Java虚拟机\"]",
+    "answer": "Java虚拟机",
+    "explanation": "Java技术",
+    "score": 10
+  },
+  {
+    "id": 46,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "计算机上的时间是通过EPOX系统测量的。",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "计算机时间通过Unix时间戳测量",
+    "score": 10
+  },
+  {
+    "id": 47,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "以太网网络使用以下哪种物理拓扑结构？",
+    "options": "[\"星型\", \"环型\", \"六边形\", \"网状\"]",
+    "answer": "星型",
+    "explanation": "网络基础",
+    "score": 30
+  },
+  {
+    "id": 48,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "在Windows操作系统中，AD代表什么？",
+    "options": "[\"Alternative Drive\", \"Active Department\", \"Active Directory\", \"Automated Database\"]",
+    "answer": "Active Directory",
+    "explanation": "Windows系统",
+    "score": 20
+  },
+  {
+    "id": 49,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "在Windows操作系统上，'复制'功能的常用键盘快捷键是什么？",
+    "options": "[\"Alt + C\", \"Alt + X\", \"Ctrl + C\", \"Ctrl + X\"]",
+    "answer": "Ctrl + C",
+    "explanation": "操作系统",
+    "score": 10
+  },
+  {
+    "id": 50,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "Windows 7操作系统有六个主要版本。",
+    "options": "[\"对\", \"错\"]",
+    "answer": "对",
+    "explanation": "操作系统",
+    "score": 10
+  }
+]

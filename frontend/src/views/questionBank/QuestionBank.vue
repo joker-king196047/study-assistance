@@ -1,96 +1,99 @@
 <template>
-  <div class="question-bank">
-    <div class="page-header">
-      <h1>题库中心</h1>
-      <p>选择专业方向和知识点分类，开始刷题练习</p>
-    </div>
+  <MainLayout>
+    <div class="question-bank">
+      <div class="page-header">
+        <h1>题库中心</h1>
+        <p>选择专业方向和知识点分类，开始刷题练习</p>
+      </div>
 
-    <div class="bank-layout">
-      <aside class="major-sidebar">
-        <div class="sidebar-title">学科门类</div>
-        <div class="major-list">
-          <div
-            v-for="group in categories"
-            :key="group.name"
-            class="major-item"
-            :class="{ active: activeMajor === group.name }"
-            @click="selectMajor(group.name)"
-          >
-            <div class="major-icon">
-              <el-icon :size="18">
-                <component :is="getMajorIcon(group.icon)" />
-              </el-icon>
-            </div>
-            <div class="major-info">
-              <span class="major-name">{{ group.name }}</span>
-              <span class="major-count">{{ group.subCategories.length }} 个专业类</span>
-            </div>
-          </div>
-        </div>
-      </aside>
-
-      <main class="subject-area">
-        <div v-if="loading" class="empty-hint">
-          <el-icon :size="32" class="is-loading"><Loading /></el-icon>
-          <p>正在加载学科分类...</p>
-        </div>
-
-        <div v-else-if="loadError" class="empty-hint error-hint">
-          <el-icon :size="64" color="#f56c6c"><WarningFilled /></el-icon>
-          <p>加载失败：{{ loadError }}</p>
-          <el-button size="small" type="primary" @click="retryLoad">重新加载</el-button>
-        </div>
-
-        <div v-else-if="!activeMajor" class="empty-hint">
-          <el-icon :size="80" color="#e0e0e0"><ArrowLeft /></el-icon>
-          <p>请先在左侧选择一个学科门类</p>
-        </div>
-
-        <template v-else>
-          <div class="subject-area-header">
-            <h2>{{ activeMajor }}</h2>
-            <span class="subject-count">{{ currentSubjects.length }} 个专业类</span>
-          </div>
-
-          <div class="subject-grid">
+      <div class="bank-layout">
+        <aside class="major-sidebar">
+          <div class="sidebar-title">学科门类</div>
+          <div class="major-list">
             <div
-              v-for="sub in currentSubjects"
-              :key="sub.id"
-              class="subject-card"
-              @click="goToProblemList(sub.id, sub.name)"
+              v-for="group in categories"
+              :key="group.name"
+              class="major-item"
+              :class="{ active: activeMajor === group.name }"
+              @click="selectMajor(group.name)"
             >
-              <div class="subject-card-icon">
-                <el-icon :size="24">
-                  <Document v-if="sub.id.startsWith('cs-') || sub.id === 'philosophy' || sub.id === 'law' || sub.id === 'history'" />
-                  <DataAnalysis v-else-if="sub.id.startsWith('econ-') || sub.id.startsWith('mgmt-') || sub.id === 'statistics'" />
-                  <Connection v-else-if="sub.id.startsWith('edu-') || sub.id === 'journalism'" />
-                  <Cpu v-else-if="sub.id.startsWith('eng-') || sub.id === 'math' || sub.id === 'physics'" />
-                  <Setting v-else-if="sub.id.startsWith('med-') || sub.id === 'chemistry' || sub.id === 'biology'" />
-                  <Monitor v-else-if="sub.id.startsWith('agri-') || sub.id === 'geography'" />
-                  <EditPen v-else-if="sub.id.startsWith('art-') || sub.id === 'chinese-lang' || sub.id === 'foreign-lang'" />
-                  <EditPen v-else />
+              <div class="major-icon">
+                <el-icon :size="18">
+                  <component :is="getMajorIcon(group.icon)" />
                 </el-icon>
               </div>
-              <div class="subject-card-body">
-                <h3>{{ sub.name }}</h3>
-                <p>{{ sub.description }}</p>
-              </div>
-              <div class="subject-card-footer">
-                <span class="question-count">{{ sub.questionCount }} 题</span>
-                <el-icon :size="16"><ArrowRight /></el-icon>
+              <div class="major-info">
+                <span class="major-name">{{ group.name }}</span>
+                <span class="major-count">{{ group.subCategories.length }} 个专业类</span>
               </div>
             </div>
           </div>
-        </template>
-      </main>
+        </aside>
+
+        <main class="subject-area">
+          <div v-if="loading" class="empty-hint">
+            <el-icon :size="32" class="is-loading"><Loading /></el-icon>
+            <p>正在加载学科分类...</p>
+          </div>
+
+          <div v-else-if="loadError" class="empty-hint error-hint">
+            <el-icon :size="64" color="#f56c6c"><WarningFilled /></el-icon>
+            <p>加载失败：{{ loadError }}</p>
+            <el-button size="small" type="primary" @click="retryLoad">重新加载</el-button>
+          </div>
+
+          <div v-else-if="!activeMajor" class="empty-hint">
+            <el-icon :size="80" color="#e0e0e0"><ArrowLeft /></el-icon>
+            <p>请先在左侧选择一个学科门类</p>
+          </div>
+
+          <template v-else>
+            <div class="subject-area-header">
+              <h2>{{ activeMajor }}</h2>
+              <span class="subject-count">{{ currentSubjects.length }} 个专业类</span>
+            </div>
+
+            <div class="subject-grid">
+              <div
+                v-for="sub in currentSubjects"
+                :key="sub.id"
+                class="subject-card"
+                @click="goToProblemList(sub.id, sub.name)"
+              >
+                <div class="subject-card-icon">
+                  <el-icon :size="24">
+                    <Document v-if="sub.id.startsWith('cs-') || sub.id === 'philosophy' || sub.id === 'law' || sub.id === 'history'" />
+                    <DataAnalysis v-else-if="sub.id.startsWith('econ-') || sub.id.startsWith('mgmt-') || sub.id === 'statistics'" />
+                    <Connection v-else-if="sub.id.startsWith('edu-') || sub.id === 'journalism'" />
+                    <Cpu v-else-if="sub.id.startsWith('eng-') || sub.id === 'math' || sub.id === 'physics'" />
+                    <Setting v-else-if="sub.id.startsWith('med-') || sub.id === 'chemistry' || sub.id === 'biology'" />
+                    <Monitor v-else-if="sub.id.startsWith('agri-') || sub.id === 'geography'" />
+                    <EditPen v-else-if="sub.id.startsWith('art-') || sub.id === 'chinese-lang' || sub.id === 'foreign-lang'" />
+                    <EditPen v-else />
+                  </el-icon>
+                </div>
+                <div class="subject-card-body">
+                  <h3>{{ sub.name }}</h3>
+                  <p>{{ sub.description }}</p>
+                </div>
+                <div class="subject-card-footer">
+                  <span class="question-count">{{ sub.questionCount }} 题</span>
+                  <el-icon :size="16"><ArrowRight /></el-icon>
+                </div>
+              </div>
+            </div>
+          </template>
+        </main>
+      </div>
     </div>
-  </div>
+  </MainLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getCategories, type CategoryGroup } from '@/api/questionBank'
+import MainLayout from '@/layouts/MainLayout.vue'
 import {
   Monitor, EditPen, Document, Cpu, Connection, Setting,
   DataAnalysis, ArrowRight, ArrowLeft, Loading, WarningFilled
@@ -142,9 +145,8 @@ function retryLoad() {
 function fetchCategories() {
   getCategories()
     .then(res => {
-      const data = (res && res.data) ? res.data : res
-      if (Array.isArray(data)) {
-        categories.value = data as unknown as CategoryGroup[]
+      if (Array.isArray(res)) {
+        categories.value = res as unknown as CategoryGroup[]
       } else {
         throw new Error('数据格式不正确')
       }

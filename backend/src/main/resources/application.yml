@@ -5,10 +5,10 @@ spring:
   application:
     name: study-assistance
   datasource:
-    url: jdbc:mysql://localhost:3309/study_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/study?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
     driverClassName: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123456
+    username: study
+    password: password
   jpa:
     hibernate:
       ddl-auto: update

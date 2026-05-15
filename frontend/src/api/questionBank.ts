@@ -26,6 +26,29 @@ export interface Question {
   score: number
 }
 
+export type QuestionItem = Question
+
+export interface SubmitResult {
+  isCorrect: boolean
+  scoreEarned: number
+  correctAnswer: string
+  explanation?: string
+}
+
+export interface BankDetail {
+  bank: {
+    id: number
+    name: string
+    description: string
+  }
+  totalQuestions: number
+  singleCount: number
+  multipleCount: number
+  judgeCount: number
+  fillCount: number
+  essayCount: number
+}
+
 export const getCategories = (): AxiosPromise<CategoryGroup[]> => {
   return request({
     url: '/api/question-bank/categories',
@@ -33,10 +56,27 @@ export const getCategories = (): AxiosPromise<CategoryGroup[]> => {
   })
 }
 
-export const getQuestions = (bankId: string): AxiosPromise<Question[]> => {
+export const getQuestions = (bankId: number, type?: string): AxiosPromise<Question[]> => {
+  const params = type ? { type } : {}
   return request({
     url: `/api/question-bank/questions/${bankId}`,
+    method: 'get',
+    params
+  })
+}
+
+export const getBankDetail = (bankId: number): AxiosPromise<BankDetail> => {
+  return request({
+    url: `/api/question-bank/bank/${bankId}`,
     method: 'get'
+  })
+}
+
+export const submitAnswer = (userId: number, questionId: number, answer: string): AxiosPromise<SubmitResult> => {
+  return request({
+    url: '/api/question-bank/submit',
+    method: 'post',
+    data: { userId, questionId, answer }
   })
 }
 

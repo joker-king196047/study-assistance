@@ -1,159 +1,162 @@
 <template>
-  <div class="problem-detail-page">
-    <div v-if="loading" class="loading-state">
-      <el-icon :size="32" class="is-loading"><Loading /></el-icon>
-      <p>正在加载题目...</p>
+  <MainLayout>
+    <div class="problem-detail-page">
+      <div v-if="loading" class="loading-state">
+        <el-icon :size="32" class="is-loading"><Loading /></el-icon>
+        <p>正在加载题目...</p>
+      </div>
+
+      <template v-else-if="question">
+        <div class="page-header">
+          <div class="back-btn" @click="goBack">
+            <el-icon><ArrowLeft /></el-icon>
+            <span>返回题目列表</span>
+          </div>
+        </div>
+
+        <div class="question-container">
+          <div class="question-main">
+            <div class="question-header">
+              <span class="type-tag" :class="question.type">{{ typeLabel(question.type) }}</span>
+              <span class="difficulty-tag" :class="question.difficulty">{{ difficultyLabel(question.difficulty) }}</span>
+              <span class="score-tag">{{ question.score }}分</span>
+            </div>
+
+            <h2 class="question-content">{{ question.content }}</h2>
+
+            <div class="answer-area">
+              <template v-if="question.type === 'single'">
+                <div class="option-label">请选择正确答案：</div>
+                <div
+                  v-for="(opt, idx) in parsedOptions"
+                  :key="idx"
+                  class="option-item"
+                  :class="{
+                    selected: userAnswer === String.fromCharCode(65 + idx),
+                    correct: submitted && String.fromCharCode(65 + idx) === question.answer,
+                    wrong: submitted && userAnswer === String.fromCharCode(65 + idx) && userAnswer !== question.answer
+                  }"
+                  @click="!submitted && (userAnswer = String.fromCharCode(65 + idx))"
+                >
+                  <span class="option-letter">{{ String.fromCharCode(65 + idx) }}</span>
+                  <span class="option-text">{{ opt }}</span>
+                  <el-icon v-if="submitted && String.fromCharCode(65 + idx) === question.answer" class="result-icon correct"><Check /></el-icon>
+                  <el-icon v-if="submitted && userAnswer === String.fromCharCode(65 + idx) && userAnswer !== question.answer" class="result-icon wrong"><Close /></el-icon>
+                </div>
+              </template>
+
+              <template v-else-if="question.type === 'multiple'">
+                <div class="option-label">请选择所有正确答案（多选）：</div>
+                <div
+                  v-for="(opt, idx) in parsedOptions"
+                  :key="idx"
+                  class="option-item"
+                  :class="{
+                    selected: multipleAnswers.includes(String.fromCharCode(65 + idx)),
+                    correct: submitted && question.answer.split(',').map((s: string) => s.trim()).includes(String.fromCharCode(65 + idx)),
+                    wrong: submitted && multipleAnswers.includes(String.fromCharCode(65 + idx)) && !question.answer.split(',').map((s: string) => s.trim()).includes(String.fromCharCode(65 + idx))
+                  }"
+                  @click="!submitted && toggleMultiple(String.fromCharCode(65 + idx))"
+                >
+                  <span class="option-letter">{{ String.fromCharCode(65 + idx) }}</span>
+                  <span class="option-text">{{ opt }}</span>
+                  <el-icon v-if="submitted && question.answer.split(',').map((s: string) => s.trim()).includes(String.fromCharCode(65 + idx))" class="result-icon correct"><Check /></el-icon>
+                  <el-icon v-if="submitted && multipleAnswers.includes(String.fromCharCode(65 + idx)) && !question.answer.split(',').map((s: string) => s.trim()).includes(String.fromCharCode(65 + idx))" class="result-icon wrong"><Close /></el-icon>
+                </div>
+              </template>
+
+              <template v-else-if="question.type === 'judge'">
+                <div class="option-label">请判断对错：</div>
+                <div class="judge-options">
+                  <div
+                    class="option-item judge-item"
+                    :class="{
+                      selected: userAnswer === '对',
+                      correct: submitted && question.answer === '对',
+                      wrong: submitted && userAnswer === '对' && question.answer !== '对'
+                    }"
+                    @click="!submitted && (userAnswer = '对')"
+                  >
+                    <span class="option-letter">T</span>
+                    <span class="option-text">正确</span>
+                  </div>
+                  <div
+                    class="option-item judge-item"
+                    :class="{
+                      selected: userAnswer === '错',
+                      correct: submitted && question.answer === '错',
+                      wrong: submitted && userAnswer === '错' && question.answer !== '错'
+                    }"
+                    @click="!submitted && (userAnswer = '错')"
+                  >
+                    <span class="option-letter">F</span>
+                    <span class="option-text">错误</span>
+                  </div>
+                </div>
+              </template>
+
+              <template v-else-if="question.type === 'fill'">
+                <div class="option-label">请填写答案：</div>
+                <el-input
+                  v-model="userAnswer"
+                  placeholder="请输入答案"
+                  :disabled="submitted"
+                  size="large"
+                />
+              </template>
+
+              <template v-else-if="question.type === 'essay'">
+                <div class="option-label">请写出你的解答过程：</div>
+                <el-input
+                  v-model="userAnswer"
+                  type="textarea"
+                  :rows="8"
+                  placeholder="请输入详细解答过程..."
+                  :disabled="submitted"
+                />
+              </template>
+            </div>
+
+            <div class="action-bar" v-if="!submitted">
+              <el-button type="primary" size="large" :disabled="!hasAnswer" @click="handleSubmit" :loading="submitting">
+                提交答案
+              </el-button>
+            </div>
+
+            <div class="result-card" v-if="submitted">
+              <div class="result-header" :class="submitResult?.isCorrect ? 'correct' : 'wrong'">
+                <el-icon :size="24">
+                  <Check v-if="submitResult?.isCorrect" />
+                  <Close v-else />
+                </el-icon>
+                <span>{{ submitResult?.isCorrect ? '回答正确！' : '回答错误' }}</span>
+                <span class="result-score">+{{ submitResult?.scoreEarned }}分</span>
+              </div>
+              <div class="result-answer">
+                <span class="label">正确答案：</span>
+                <span class="value">{{ submitResult?.correctAnswer }}</span>
+              </div>
+              <div class="result-explanation" v-if="submitResult?.explanation">
+                <span class="label">解析：</span>
+                <span class="value">{{ submitResult.explanation }}</span>
+              </div>
+              <div class="result-actions">
+                <el-button @click="goBack">返回题目列表</el-button>
+                <el-button type="primary" @click="nextQuestion">下一题</el-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
     </div>
-
-    <template v-else-if="question">
-      <div class="page-header">
-        <div class="back-btn" @click="goBack">
-          <el-icon><ArrowLeft /></el-icon>
-          <span>返回题目列表</span>
-        </div>
-      </div>
-
-      <div class="question-container">
-        <div class="question-main">
-          <div class="question-header">
-            <span class="type-tag" :class="question.type">{{ typeLabel(question.type) }}</span>
-            <span class="difficulty-tag" :class="question.difficulty">{{ difficultyLabel(question.difficulty) }}</span>
-            <span class="score-tag">{{ question.score }}分</span>
-          </div>
-
-          <h2 class="question-content">{{ question.content }}</h2>
-
-          <div class="answer-area">
-            <template v-if="question.type === 'single'">
-              <div class="option-label">请选择正确答案：</div>
-              <div
-                v-for="(opt, idx) in parsedOptions"
-                :key="idx"
-                class="option-item"
-                :class="{
-                  selected: userAnswer === String.fromCharCode(65 + idx),
-                  correct: submitted && String.fromCharCode(65 + idx) === question.answer,
-                  wrong: submitted && userAnswer === String.fromCharCode(65 + idx) && userAnswer !== question.answer
-                }"
-                @click="!submitted && (userAnswer = String.fromCharCode(65 + idx))"
-              >
-                <span class="option-letter">{{ String.fromCharCode(65 + idx) }}</span>
-                <span class="option-text">{{ opt }}</span>
-                <el-icon v-if="submitted && String.fromCharCode(65 + idx) === question.answer" class="result-icon correct"><Check /></el-icon>
-                <el-icon v-if="submitted && userAnswer === String.fromCharCode(65 + idx) && userAnswer !== question.answer" class="result-icon wrong"><Close /></el-icon>
-              </div>
-            </template>
-
-            <template v-else-if="question.type === 'multiple'">
-              <div class="option-label">请选择所有正确答案（多选）：</div>
-              <div
-                v-for="(opt, idx) in parsedOptions"
-                :key="idx"
-                class="option-item"
-                :class="{
-                  selected: multipleAnswers.includes(String.fromCharCode(65 + idx)),
-                  correct: submitted && question.answer.split(',').map((s: string) => s.trim()).includes(String.fromCharCode(65 + idx)),
-                  wrong: submitted && multipleAnswers.includes(String.fromCharCode(65 + idx)) && !question.answer.split(',').map((s: string) => s.trim()).includes(String.fromCharCode(65 + idx))
-                }"
-                @click="!submitted && toggleMultiple(String.fromCharCode(65 + idx))"
-              >
-                <span class="option-letter">{{ String.fromCharCode(65 + idx) }}</span>
-                <span class="option-text">{{ opt }}</span>
-                <el-icon v-if="submitted && question.answer.split(',').map((s: string) => s.trim()).includes(String.fromCharCode(65 + idx))" class="result-icon correct"><Check /></el-icon>
-                <el-icon v-if="submitted && multipleAnswers.includes(String.fromCharCode(65 + idx)) && !question.answer.split(',').map((s: string) => s.trim()).includes(String.fromCharCode(65 + idx))" class="result-icon wrong"><Close /></el-icon>
-              </div>
-            </template>
-
-            <template v-else-if="question.type === 'judge'">
-              <div class="option-label">请判断对错：</div>
-              <div class="judge-options">
-                <div
-                  class="option-item judge-item"
-                  :class="{
-                    selected: userAnswer === '对',
-                    correct: submitted && question.answer === '对',
-                    wrong: submitted && userAnswer === '对' && question.answer !== '对'
-                  }"
-                  @click="!submitted && (userAnswer = '对')"
-                >
-                  <span class="option-letter">T</span>
-                  <span class="option-text">正确</span>
-                </div>
-                <div
-                  class="option-item judge-item"
-                  :class="{
-                    selected: userAnswer === '错',
-                    correct: submitted && question.answer === '错',
-                    wrong: submitted && userAnswer === '错' && question.answer !== '错'
-                  }"
-                  @click="!submitted && (userAnswer = '错')"
-                >
-                  <span class="option-letter">F</span>
-                  <span class="option-text">错误</span>
-                </div>
-              </div>
-            </template>
-
-            <template v-else-if="question.type === 'fill'">
-              <div class="option-label">请填写答案：</div>
-              <el-input
-                v-model="userAnswer"
-                placeholder="请输入答案"
-                :disabled="submitted"
-                size="large"
-              />
-            </template>
-
-            <template v-else-if="question.type === 'essay'">
-              <div class="option-label">请写出你的解答过程：</div>
-              <el-input
-                v-model="userAnswer"
-                type="textarea"
-                :rows="8"
-                placeholder="请输入详细解答过程..."
-                :disabled="submitted"
-              />
-            </template>
-          </div>
-
-          <div class="action-bar" v-if="!submitted">
-            <el-button type="primary" size="large" :disabled="!hasAnswer" @click="handleSubmit" :loading="submitting">
-              提交答案
-            </el-button>
-          </div>
-
-          <div class="result-card" v-if="submitted">
-            <div class="result-header" :class="submitResult?.isCorrect ? 'correct' : 'wrong'">
-              <el-icon :size="24">
-                <Check v-if="submitResult?.isCorrect" />
-                <Close v-else />
-              </el-icon>
-              <span>{{ submitResult?.isCorrect ? '回答正确！' : '回答错误' }}</span>
-              <span class="result-score">+{{ submitResult?.scoreEarned }}分</span>
-            </div>
-            <div class="result-answer">
-              <span class="label">正确答案：</span>
-              <span class="value">{{ submitResult?.correctAnswer }}</span>
-            </div>
-            <div class="result-explanation" v-if="submitResult?.explanation">
-              <span class="label">解析：</span>
-              <span class="value">{{ submitResult.explanation }}</span>
-            </div>
-            <div class="result-actions">
-              <el-button @click="goBack">返回题目列表</el-button>
-              <el-button type="primary" @click="nextQuestion">下一题</el-button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-  </div>
+  </MainLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getQuestionById, submitAnswer, type QuestionItem, type SubmitResult } from '@/api/questionBank'
+import MainLayout from '@/layouts/MainLayout.vue'
 import { ArrowLeft, Loading, Check, Close } from '@element-plus/icons-vue'
 
 const route = useRoute()
@@ -186,7 +189,7 @@ const hasAnswer = computed(() => {
 onMounted(async () => {
   try {
     const res = await getQuestionById(questionId)
-    question.value = (res as any).data || res as any
+    question.value = res as any
   } catch (e) {
     console.error('加载题目失败', e)
   } finally {
@@ -214,7 +217,7 @@ async function handleSubmit() {
   const userId = getUserId()
   try {
     const res = await submitAnswer(userId, questionId, finalAnswer)
-    submitResult.value = (res as any).data || res as any
+    submitResult.value = res as any
     submitted.value = true
   } catch (e) {
     console.error('提交失败', e)
@@ -235,11 +238,11 @@ function getUserId(): number {
 }
 
 function goBack() {
-  router.push({ name: 'ProblemList', params: { bankId } })
+  router.push({ name: 'ProblemList', query: { subCategory: `bank-${bankId}` } })
 }
 
 function nextQuestion() {
-  router.push({ name: 'ProblemList', params: { bankId } })
+  router.push({ name: 'ProblemList', query: { subCategory: `bank-${bankId}` } })
 }
 
 function typeLabel(t: string) {

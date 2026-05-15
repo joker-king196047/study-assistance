@@ -1,0 +1,502 @@
+[
+  {
+    "id": 1,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "In programming, the ternary operator is mostly defined with what symbol(s)?",
+    "options": "[\"?\", \"?:\", \"if then\", \"??\"]",
+    "answer": "?:",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 2,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "When Gmail first launched, how much storage did it provide for your email?",
+    "options": "[\"Unlimited\", \"1GB\", \"512MB\", \"5GB\"]",
+    "answer": "1GB",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 3,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "In most programming languages, the operator ++ is equivalent to the statement \"+= 1\".",
+    "options": "[\"对\", \"错\"]",
+    "answer": "对",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 4,
+    "type": "judge",
+    "difficulty": "medium",
+    "question": "The 'Raspberry Pi' series of single-board computers were created in the United States.",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 5,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "What is the main CPU is the Sega Mega Drive / Sega Genesis?",
+    "options": "[\"Yamaha YM2612\", \"Zilog Z80\", \"Motorola 68000\", \"Intel 8088\"]",
+    "answer": "Motorola 68000",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 6,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "Which data structure does FILO apply to?",
+    "options": "[\"Stack\", \"Tree\", \"Queue\", \"Heap\"]",
+    "answer": "Stack",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 7,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "Who is the founder of Palantir?",
+    "options": "[\"Peter Thiel\", \"Jack Dorsey\", \"Marc Benioff\", \"Mark Zuckerberg\"]",
+    "answer": "Peter Thiel",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 8,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "Which internet company began life as an online bookstore called 'Cadabra'?",
+    "options": "[\"Amazon\", \"Overstock\", \"Shopify\", \"eBay\"]",
+    "answer": "Amazon",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 9,
+    "type": "judge",
+    "difficulty": "medium",
+    "question": "AMD created the first consumer 64-bit processor.",
+    "options": "[\"对\", \"错\"]",
+    "answer": "对",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 10,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "In networking, what does OSPF stand for?",
+    "options": "[\"Open Signal Path Finder\", \"Open Shortest Path First\", \"Order State Part First\", \"Order Sense Ping Find\"]",
+    "answer": "Open Shortest Path First",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 11,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "In HTML, which non-standard tag used to be be used to make elements scroll across the viewport?",
+    "options": "[\"<marquee></marquee>\", \"<scroll></scroll>\", \"<slide></slide>\", \"<move></move>\"]",
+    "answer": "<marquee></marquee>",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 12,
+    "type": "judge",
+    "difficulty": "hard",
+    "question": "DHCP stands for Dynamic Host Configuration Port.",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 13,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "Which one of these is not an official development name for a Ubuntu release?",
+    "options": "[\"Wily Werewolf\", \"Utopic Unicorn\", \"Mystic Mansion\", \"Trusty Tahr\"]",
+    "answer": "Mystic Mansion",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 14,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "The teapot often seen in many 3D modeling applications is called what?",
+    "options": "[\"3D Teapot\", \"Pixar Teapot\", \"Tennessee Teapot\", \"Utah Teapot\"]",
+    "answer": "Utah Teapot",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 15,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "CMOS is tech used for constructing integrated circuits. What does CMOS stand for?",
+    "options": "[\"Complementary metal–oxide–semiconductor\", \"Computer-made oscillating static\", \"Complementary magnetic-ohms-semiconductor\", \"Computer-made operating system\"]",
+    "answer": "Complementary metal–oxide–semiconductor",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 16,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "Which programming language was developed by Sun Microsystems in 1995?",
+    "options": "[\"Solaris OS\", \"C++\", \"Java\", \"Python\"]",
+    "answer": "Java",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 17,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "Linus Torvalds created Linux and Git.",
+    "options": "[\"对\", \"错\"]",
+    "answer": "对",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 18,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "The name of the programming language AWK is abbreviated from the names of the developers – Aho, Weinberger, and Kernighan.",
+    "options": "[\"对\", \"错\"]",
+    "answer": "对",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 19,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "Which of the following is a personal computer made by the Japanese company Fujitsu?",
+    "options": "[\"MSX\", \"Xmillennium \", \"PC-9801\", \"FM-7\"]",
+    "answer": "FM-7",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 20,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "What does SSD stand for?",
+    "options": "[\"Solution Source Disk\", \"Source Solution Drive\", \"Solid State Disk\", \"Solid State Drive\"]",
+    "answer": "Solid State Drive",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 21,
+    "type": "judge",
+    "difficulty": "medium",
+    "question": "The common software-programming acronym \"I18N\" comes from the term \"Interlocalization\".",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 22,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "What did the name of the Tor Anonymity Network orignially stand for?",
+    "options": "[\"The Only Router\", \"The Ominous Router\", \"The Onion Router\", \"The Orange Router\"]",
+    "answer": "The Onion Router",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 23,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "Which RAID array type is associated with data mirroring?",
+    "options": "[\"RAID 5\", \"RAID 0\", \"RAID 1\", \"RAID 10\"]",
+    "answer": "RAID 1",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 24,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "What was the first Android version specifically optimized for tablets?",
+    "options": "[\"Eclair\", \"Froyo\", \"Honeycomb\", \"Marshmellow\"]",
+    "answer": "Honeycomb",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 25,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "The programming language \"Python\" is based off a modified version of \"JavaScript\".",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 26,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "What amount of bits commonly equals one byte?",
+    "options": "[\"64\", \"8\", \"1\", \"2\"]",
+    "answer": "8",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 27,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "How many bits make up the significand portion of a single precision floating point number?",
+    "options": "[\"8\", \"15\", \"53\", \"23\"]",
+    "answer": "23",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 28,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "Released in 2001, the first edition of Apple's Mac OS X operating system (version 10.0) was given what animal code name?",
+    "options": "[\"Puma\", \"Cheetah\", \"Tiger\", \"Leopard\"]",
+    "answer": "Cheetah",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 29,
+    "type": "judge",
+    "difficulty": "medium",
+    "question": "The open source program Redis is a relational database server.",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 30,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "What is the name of the process that sends one qubit of information using two bits of classical information?",
+    "options": "[\"Quantum Entanglement\", \"Quantum Teleportation\", \"Super Dense Coding\", \"Quantum Programming\"]",
+    "answer": "Quantum Teleportation",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 31,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "Originally used in PCM adapters, what frequency is the standard for sampling audio in the Compact Disc Digital Audio format?",
+    "options": "[\"32.0 kHz\", \"20.5 kHz\", \"44.1 kHz\", \"1.5 MHz\"]",
+    "answer": "44.1 kHz",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 32,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "How long is an IPv6 address?",
+    "options": "[\"32 bits\", \"128 bits\", \"128 bytes\", \"64 bits\"]",
+    "answer": "128 bits",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 33,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "What language does Node.js use?",
+    "options": "[\"JavaScript\", \"Java Source\", \"Java\", \"Joomla Source Code\"]",
+    "answer": "JavaScript",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 34,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "Which computer hardware device provides an interface for all other connected devices to communicate?",
+    "options": "[\"Central Processing Unit\", \"Random Access Memory\", \"Motherboard\", \"Hard Disk Drive\"]",
+    "answer": "Motherboard",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 35,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "What does LTS stand for in the software market?",
+    "options": "[\"Ludicrous Transfer Speed\", \"Ludicrous Turbo Speed\", \"Long Term Support\", \"Long Taco Service\"]",
+    "answer": "Long Term Support",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 36,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "Which of the following is NOT a computer science algorithm?",
+    "options": "[\"Merge Sort\", \"Float Sort\", \"Bubble Sort\", \"Quick Sort\"]",
+    "answer": "Float Sort",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 37,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "On Twitter, what was the original character limit for a Tweet?",
+    "options": "[\"120\", \"100\", \"160\", \"140\"]",
+    "answer": "140",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 38,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "Lenovo acquired IBM's personal computer division, including the ThinkPad line of laptops and tablets, in what year?",
+    "options": "[\"2008\", \"2005\", \"2002\", \"1999\"]",
+    "answer": "2005",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 39,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "What was the name given to Android 4.3?",
+    "options": "[\"Froyo\", \"Lollipop\", \"Nutella\", \"Jelly Bean\"]",
+    "answer": "Jelly Bean",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 40,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "Which of these was the name of a bug found in April 2014 in the publicly available OpenSSL cryptography library?",
+    "options": "[\"Shellscript\", \"Shellshock\", \"Heartbleed\", \"Corrupted Blood\"]",
+    "answer": "Heartbleed",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 41,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "Which of these is not a key value of Agile software development?",
+    "options": "[\"Individuals and interactions\", \"Customer collaboration\", \"Comprehensive documentation\", \"Responding to change\"]",
+    "answer": "Comprehensive documentation",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 42,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "Moore's law originally stated that the number of transistors on a microprocessor chip would double every...",
+    "options": "[\"Eight Years\", \"Four Years\", \"Two Years\", \"Year\"]",
+    "answer": "Year",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 43,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "Color model CMYK stands for?",
+    "options": "[\"Cyan, Magenta, Yellow, and Khaki\", \"Cream, Maroon, Yellow, and Black\", \"Cyan, Magenta, Yellow, and Black\", \"Cream, Maroon, Yellow, and Khaki\"]",
+    "answer": "Cyan, Magenta, Yellow, and Black",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 44,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "On a standard American QWERTY keyboard, what symbol will you enter if you hold the shift key and press 1?",
+    "options": "[\"Percent Sign\", \"Dollar Sign\", \"Asterisk\", \"Exclamation Mark\"]",
+    "answer": "Exclamation Mark",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 45,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "What does the computer software acronym JVM stand for?",
+    "options": "[\"Java Vendor Machine\", \"Java Visual Machine\", \"Just Virtual Machine\", \"Java Virtual Machine\"]",
+    "answer": "Java Virtual Machine",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 46,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "Time on Computers is measured via the EPOX System.",
+    "options": "[\"对\", \"错\"]",
+    "answer": "错",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 47,
+    "type": "single",
+    "difficulty": "hard",
+    "question": "Which of the following physical typologies are used with Ethernet Networks?",
+    "options": "[\"Star\", \"Ring\", \"Hex\", \"Mesh\"]",
+    "answer": "Star",
+    "explanation": "分类: Science: Computers",
+    "score": 30
+  },
+  {
+    "id": 48,
+    "type": "single",
+    "difficulty": "medium",
+    "question": "What does AD stand for in relation to Windows Operating Systems? ",
+    "options": "[\"Alternative Drive\", \"Active Department\", \"Active Directory\", \"Automated Database\"]",
+    "answer": "Active Directory",
+    "explanation": "分类: Science: Computers",
+    "score": 20
+  },
+  {
+    "id": 49,
+    "type": "single",
+    "difficulty": "easy",
+    "question": "What is the commonly used keyboard shortcut for the 'Copy' function on Windows OS?",
+    "options": "[\"Alt + C\", \"Alt + X\", \"Ctrl + C\", \"Ctrl + X\"]",
+    "answer": "Ctrl + C",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  },
+  {
+    "id": 50,
+    "type": "judge",
+    "difficulty": "easy",
+    "question": "The Windows 7 operating system has six main editions.",
+    "options": "[\"对\", \"错\"]",
+    "answer": "对",
+    "explanation": "分类: Science: Computers",
+    "score": 10
+  }
+]

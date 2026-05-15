@@ -7,10 +7,7 @@ import com.study.mapper.QuestionMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +30,55 @@ public class QuestionBankService {
 
     public long getQuestionCountByBankId(Integer bankId) {
         return questionMapper.countByBankId(bankId);
+    }
+
+    public Map<String, Object> getBankDetail(Integer bankId) {
+        QuestionBank bank = questionBankMapper.findById(bankId).orElse(null);
+        if (bank == null) {
+            return null;
+        }
+
+        List<Question> allQuestions = questionMapper.findByBankId(bankId);
+        
+        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> bankInfo = new HashMap<>();
+        bankInfo.put("id", bank.getId());
+        bankInfo.put("name", bank.getName());
+        bankInfo.put("description", bank.getDescription());
+        result.put("bank", bankInfo);
+        result.put("totalQuestions", allQuestions.size());
+        result.put("singleCount", countByType(allQuestions, "single"));
+        result.put("multipleCount", countByType(allQuestions, "multiple"));
+        result.put("judgeCount", countByType(allQuestions, "judge"));
+        result.put("fillCount", countByType(allQuestions, "fill"));
+        result.put("essayCount", countByType(allQuestions, "essay"));
+        
+        return result;
+    }
+
+    private long countByType(List<Question> questions, String type) {
+        return questions.stream().filter(q -> type.equals(q.getType())).count();
+    }
+
+    public Map<String, Object> submitAnswer(Long userId, Long questionId, String answer) {
+        Question question = questionMapper.findById(questionId).orElse(null);
+        if (question == null) {
+            return null;
+        }
+
+        Map<String, Object> result = new HashMap<>();
+        boolean isCorrect = normalizeAnswer(answer).equals(normalizeAnswer(question.getAnswer()));
+        
+        result.put("isCorrect", isCorrect);
+        result.put("scoreEarned", isCorrect ? question.getScore() : 0);
+        result.put("correctAnswer", question.getAnswer());
+        result.put("explanation", question.getExplanation());
+        
+        return result;
+    }
+
+    private String normalizeAnswer(String answer) {
+        return answer == null ? "" : answer.trim().toUpperCase().replaceAll("\\s+", "");
     }
 
     public List<Map<String, Object>> getCategories() {
