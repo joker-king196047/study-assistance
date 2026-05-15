@@ -72,21 +72,24 @@ const loading = ref(false)
 
 const handleLogin = async () => {
   if (!formRef.value) return
-  await formRef.value.validate(async (valid) => {
-    if (valid) {
-      loading.value = true
-      try {
-        await userStore.login(loginForm)
-        ElMessage.success('登录成功')
-        const redirect = (route.query.redirect as string) || '/home'
-        router.push(redirect)
-      } catch (error) {
-        ElMessage.error('登录失败，请检查用户名和密码')
-      } finally {
-        loading.value = false
-      }
-    }
-  })
+  try {
+    await formRef.value.validate()
+  } catch {
+    return
+  }
+  
+  loading.value = true
+  try {
+    await userStore.login(loginForm)
+    ElMessage.success('登录成功')
+    const redirect = (route.query.redirect as string) || '/home'
+    router.push(redirect).catch(() => {})
+  } catch (error: any) {
+    const msg = error?.response?.data?.message || error?.message || '登录失败，请检查用户名和密码'
+    ElMessage.error(msg)
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 

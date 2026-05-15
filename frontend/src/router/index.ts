@@ -9,12 +9,16 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/Landing.vue'),
     meta: { requiresAuth: false }
   },
+
+
   {
     path: '/home',
     name: 'Home',
     component: () => import('@/views/Home.vue'),
     meta: { requiresAuth: true }
   },
+
+  
   {
     path: '/login',
     name: 'Login',
@@ -50,8 +54,29 @@ const routes: RouteRecordRaw[] = [
     name: 'LocalProfileSetup',
     component: () => import('@/views/profile/LocalProfileSetup.vue'),
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/question-bank',
+    name: 'QuestionBank',
+    component: () => import('@/views/questionBank/QuestionBank.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/question-bank/problems',
+    name: 'ProblemList',
+    component: () => import('@/views/questionBank/ProblemList.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/question-bank/problem/:id',
+    name: 'ProblemDetail',
+    component: () => import('@/views/questionBank/ProblemDetail.vue'),
+    meta: { requiresAuth: true }
   }
 ]
+
+
+
 
 const router = createRouter({
   history: createWebHistory(),
@@ -61,7 +86,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   const token = userStore.token
-  
+
   if (token && !userStore.userInfo) {
     try {
       await userStore.fetchUserInfo()

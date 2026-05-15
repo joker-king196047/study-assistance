@@ -1,5 +1,6 @@
 package com.study.service;
 
+import com.study.common.BusinessException;
 import com.study.entity.User;
 import com.study.mapper.UserMapper;
 import com.study.utils.JwtUtils;
@@ -20,10 +21,10 @@ public class UserService {
 
     public Map<String, Object> register(String username, String email, String password) {
         if (userMapper.existsByUsername(username)) {
-            throw new RuntimeException("用户名已存在");
+            throw new BusinessException(400, "用户名已存在");
         }
         if (userMapper.existsByEmail(email)) {
-            throw new RuntimeException("邮箱已被注册");
+            throw new BusinessException(400, "邮箱已被注册");
         }
 
         User user = new User();
@@ -41,10 +42,10 @@ public class UserService {
 
     public Map<String, Object> login(String username, String password) {
         User user = userMapper.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("用户名或密码错误"));
+                .orElseThrow(() -> new BusinessException(401, "用户名或密码错误"));
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("用户名或密码错误");
+            throw new BusinessException(401, "用户名或密码错误");
         }
 
         String token = jwtUtils.generateToken(username);
@@ -56,7 +57,7 @@ public class UserService {
 
     public Map<String, Object> getUserInfo(String username) {
         User user = userMapper.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("用户不存在"));
+                .orElseThrow(() -> new BusinessException(401, "用户不存在"));
         return getUserInfo(user);
     }
 

@@ -29,11 +29,20 @@ service.interceptors.response.use(
     return res.data || res
   },
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('token')
-      window.location.href = '/login'
+    const status = error.response?.status
+    const serverMsg = error.response?.data?.message
+
+    if (status === 401) {
+      if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+        localStorage.removeItem('token')
+        window.location.href = '/login'
+      } else {
+        ElMessage.error(serverMsg || '用户名或密码错误')
+      }
+    } else if (status === 403) {
+      ElMessage.error(serverMsg || '无权限访问')
     } else {
-      ElMessage.error(error.response?.data?.message || '网络错误')
+      ElMessage.error(serverMsg || '网络错误')
     }
     return Promise.reject(error)
   }

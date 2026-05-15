@@ -70,6 +70,7 @@ import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import type { FormInstance } from 'element-plus'
 import { register } from '@/api/auth'
+import axios from 'axios'
 
 const router = useRouter()
 
@@ -80,7 +81,7 @@ const registerForm = reactive({
   confirmPassword: ''
 })
 
-const validateConfirmPassword = (rule: any, value: any, callback: any) => {
+const validateConfirmPassword = (_rule: any, value: any, callback: any) => {
   if (value !== registerForm.password) {
     callback(new Error('两次输入的密码不一致'))
   } else {
@@ -124,7 +125,36 @@ const handleRegister = async () => {
         ElMessage.success('注册成功，请登录')
         router.push('/login')
       } catch (error) {
-        ElMessage.error('注册失败')
+        let errorMsg = '注册失败，请稍后重试'
+        let shouldShowLoginLink = false
+        
+        if (axios.isAxiosError(error) && error.response?.data) {
+          const serverMsg = error.response.data.message || error.response.data.msg
+          if (serverMsg) {
+            errorMsg = serverMsg
+            if (serverMsg.includes('用户名已存在') || serverMsg.includes('邮箱已被注册')) {
+              shouldShowLoginLink = true
+            }
+          }
+        }
+        
+        ElMessage({
+          type: 'error',
+          message: shouldShowLoginLink 
+            ? `${errorMsg}，请直接登录或更换信息`
+            : errorMsg,
+          duration: 4000
+        })
+        
+        if (shouldShowLoginLink) {
+          setTimeout(() => {
+            ElMessage({
+              type: 'info',
+              message: '已有账号？点击右上角"立即登录"',
+              duration: 3000
+            })
+          }, 500)
+        }
       } finally {
         loading.value = false
       }

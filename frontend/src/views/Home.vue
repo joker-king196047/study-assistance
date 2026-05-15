@@ -11,16 +11,16 @@
         <nav class="nav-menu">
           <div 
             class="nav-item" 
-            :class="{ active: activeTab === 'home' }"
-            @click="activeTab = 'home'"
+            :class="{ active: $route.path === '/home' }"
+            @click="$router.push('/home')"
           >
             <el-icon><House /></el-icon>
             <span>首页</span>
           </div>
           <div 
             class="nav-item" 
-            :class="{ active: activeTab === 'questions' }"
-            @click="activeTab = 'questions'"
+            :class="{ active: $route.path.startsWith('/question-bank') }"
+            @click="$router.push('/question-bank')"
           >
             <el-icon><Reading /></el-icon>
             <span>题库</span>
@@ -37,9 +37,7 @@
 
     <!-- 主内容区 -->
     <main class="main-content">
-      <!-- 首页内容 -->
-      <div v-if="activeTab === 'home'" class="tab-content">
-        <!-- 欢迎横幅 -->
+      <!-- 欢迎横幅 -->
         <div class="welcome-banner">
           <div class="banner-content">
             <div class="banner-text">
@@ -166,51 +164,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- 题库内容 -->
-      <div v-else-if="activeTab === 'questions'" class="tab-content">
-        <div class="questions-header">
-          <h2>题库中心</h2>
-          <div class="search-box">
-            <el-input v-model="searchText" placeholder="搜索题目..." prefix-icon="Search" style="width: 300px;" />
-            <el-button type="primary"><el-icon><Filter /></el-icon>筛选</el-button>
-          </div>
-        </div>
-
-        <div class="category-tabs">
-          <div 
-            v-for="cat in categories" 
-            :key="cat.id"
-            class="category-tab"
-            :class="{ active: activeCategory === cat.id }"
-            @click="activeCategory = cat.id"
-          >
-            {{ cat.name }}
-          </div>
-        </div>
-
-        <div class="question-list">
-          <div class="question-card" v-for="q in questionList" :key="q.id">
-            <div class="question-header">
-              <el-tag :type="q.difficultyType" size="small">{{ q.difficulty }}</el-tag>
-              <span class="question-id">题目 #{{ q.id }}</span>
-            </div>
-            <h3 class="question-title">{{ q.title }}</h3>
-            <div class="question-tags">
-              <el-tag v-for="tag in q.tags" :key="tag" size="small" type="info">{{ tag }}</el-tag>
-            </div>
-            <div class="question-footer">
-              <div class="question-meta">
-                <span><el-icon><View /></el-icon>{{ q.views }}</span>
-                <span><el-icon><Star /></el-icon>{{ q.likes }}</span>
-                <span><el-icon><ChatDotRound /></el-icon>{{ q.comments }}</span>
-              </div>
-              <el-button type="primary" size="small">开始答题</el-button>
-            </div>
-          </div>
-        </div>
-      </div>
     </main>
 
     <!-- AI唤醒悬浮按钮 -->
@@ -347,24 +300,16 @@ import {
   Medal,
   SwitchButton,
   ChatDotRound,
-  Search,
-  Filter,
-  View,
-  Star,
   Close,
   DataAnalysis,
-  Connection,
   Plus
 } from '@element-plus/icons-vue'
 
 const router = useRouter()
 const userStore = useUserStore()
 
-const activeTab = ref('home')
-const activeCategory = ref('all')
 const showUserCenter = ref(false)
 const showAIPanel = ref(false)
-const searchText = ref('')
 const aiQuestion = ref('')
 
 const userAvatar = computed(() => `https://api.dicebear.com/7.x/avataaars/svg?seed=${userStore.userInfo?.username}`)
@@ -396,58 +341,6 @@ const recentLearn = ref([
     time: '1小时前',
     icon: 'TrendCharts',
     color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
-  }
-])
-
-const categories = ref([
-  { id: 'all', name: '全部' },
-  { id: 'js', name: 'JavaScript' },
-  { id: 'vue', name: 'Vue.js' },
-  { id: 'css', name: 'CSS' },
-  { id: 'algorithm', name: '算法' },
-  { id: 'interview', name: '面试题' }
-])
-
-const questionList = ref([
-  {
-    id: 1001,
-    title: '实现一个深拷贝函数，需要考虑循环引用的情况',
-    difficulty: '中等',
-    difficultyType: 'warning',
-    tags: ['JavaScript', '基础', '面试题'],
-    views: 1234,
-    likes: 89,
-    comments: 23
-  },
-  {
-    id: 1002,
-    title: 'Vue3 中 ref 和 reactive 的区别是什么？',
-    difficulty: '简单',
-    difficultyType: 'success',
-    tags: ['Vue.js', '响应式', '面试题'],
-    views: 2345,
-    likes: 156,
-    comments: 45
-  },
-  {
-    id: 1003,
-    title: '如何实现数组去重？请写出你能想到的所有方法',
-    difficulty: '简单',
-    difficultyType: 'success',
-    tags: ['JavaScript', '数组', '面试题'],
-    views: 3456,
-    likes: 234,
-    comments: 67
-  },
-  {
-    id: 1004,
-    title: '实现一个防抖函数 debounce',
-    difficulty: '中等',
-    difficultyType: 'warning',
-    tags: ['JavaScript', '函数', '进阶'],
-    views: 1567,
-    likes: 112,
-    comments: 34
   }
 ])
 
@@ -829,122 +722,6 @@ const handleAISend = () => {
   gap: 8px;
   color: #94a3b8;
   font-size: 13px;
-}
-
-/* 题库页面 */
-.questions-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.questions-header h2 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  color: #1e293b;
-}
-
-.search-box {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.category-tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 24px;
-  background: #fff;
-  padding: 8px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.category-tab {
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  color: #64748b;
-  transition: all 0.3s;
-}
-
-.category-tab:hover {
-  background: #f1f5f9;
-}
-
-.category-tab.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
-  font-weight: 600;
-}
-
-.question-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.question-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s;
-}
-
-.question-card:hover {
-  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
-}
-
-.question-header {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.question-id {
-  color: #94a3b8;
-  font-size: 13px;
-}
-
-.question-title {
-  margin: 0 0 16px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #1e293b;
-  line-height: 1.6;
-}
-
-.question-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-
-.question-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
-}
-
-.question-meta {
-  display: flex;
-  gap: 20px;
-  color: #94a3b8;
-  font-size: 13px;
-}
-
-.question-meta span {
-  display: flex;
-  align-items: center;
-  gap: 4px;
 }
 
 /* AI悬浮按钮 */
