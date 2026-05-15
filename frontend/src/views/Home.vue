@@ -1,5 +1,6 @@
 <template>
   <MainLayout>
+    <GlobalProfileDialog v-model:visible="showProfileDialog" @success="handleProfileSuccess" />
     <div class="home-content">
       <!-- 欢迎横幅 -->
       <div class="welcome-banner">
@@ -179,11 +180,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { ElMessage } from 'element-plus'
 import MainLayout from '@/layouts/MainLayout.vue'
+import GlobalProfileDialog from '@/components/GlobalProfileDialog.vue'
+import { globalProfileAPI } from '@/api/globalProfile'
 import { 
   VideoPlay,
   Edit,
@@ -201,12 +204,33 @@ const userStore = useUserStore()
 
 const showAIPanel = ref(false)
 const aiQuestion = ref('')
+const showProfileDialog = ref(false)
 
 const todayData = ref({
   studyTime: '2.5h',
   completed: 18,
   streak: 7
 })
+
+onMounted(async () => {
+  await checkGlobalProfile()
+})
+
+const checkGlobalProfile = async () => {
+  try {
+    const res = await globalProfileAPI.checkProfile()
+    if (res.code === 200 && !res.data) {
+      showProfileDialog.value = true
+    }
+  } catch (error) {
+    console.error('检查全局画像失败', error)
+  }
+}
+
+const handleProfileSuccess = () => {
+  ElMessage.success('画像已保存，欢迎使用！')
+  showProfileDialog.value = false
+}
 
 const recentLearn = ref([
   { 

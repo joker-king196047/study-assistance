@@ -18,4 +18,8 @@ app.use(createPinia())
 app.use(router)
 app.use(ElementPlus)
 
+<<<<<<< HEAD
 app.mount('#app')
+=======
+app.mount('#app')
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4

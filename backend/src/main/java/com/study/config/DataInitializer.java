@@ -1,10 +1,14 @@
 package com.study.config;
 
+<<<<<<< HEAD
 import com.study.entity.Question;
 import com.study.entity.QuestionBank;
 import com.study.entity.User;
 import com.study.mapper.QuestionBankMapper;
 import com.study.mapper.QuestionMapper;
+=======
+import com.study.entity.User;
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
 import com.study.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -17,8 +21,11 @@ public class DataInitializer implements CommandLineRunner {
 
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+<<<<<<< HEAD
     private final QuestionBankMapper questionBankMapper;
     private final QuestionMapper questionMapper;
+=======
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
 
     @Override
     public void run(String... args) {
@@ -33,6 +40,7 @@ public class DataInitializer implements CommandLineRunner {
             System.out.println("密码: password");
             System.out.println("====================");
         }
+<<<<<<< HEAD
 
         if (questionBankMapper.count() == 0) {
             seedData();
@@ -138,3 +146,7 @@ public class DataInitializer implements CommandLineRunner {
             "B+树的叶子节点通过链表相连，非常适合范围查询。", "easy");
     }
 }
+=======
+    }
+}
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4

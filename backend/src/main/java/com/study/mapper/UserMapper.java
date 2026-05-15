@@ -9,4 +9,8 @@ public interface UserMapper extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4

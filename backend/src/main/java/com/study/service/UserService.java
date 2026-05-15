@@ -1,6 +1,9 @@
 package com.study.service;
 
+<<<<<<< HEAD
 import com.study.common.BusinessException;
+=======
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
 import com.study.entity.User;
 import com.study.mapper.UserMapper;
 import com.study.utils.JwtUtils;
@@ -21,10 +24,17 @@ public class UserService {
 
     public Map<String, Object> register(String username, String email, String password) {
         if (userMapper.existsByUsername(username)) {
+<<<<<<< HEAD
             throw new BusinessException(400, "用户名已存在");
         }
         if (userMapper.existsByEmail(email)) {
             throw new BusinessException(400, "邮箱已被注册");
+=======
+            throw new RuntimeException("用户名已存在");
+        }
+        if (userMapper.existsByEmail(email)) {
+            throw new RuntimeException("邮箱已被注册");
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
         }
 
         User user = new User();
@@ -42,10 +52,17 @@ public class UserService {
 
     public Map<String, Object> login(String username, String password) {
         User user = userMapper.findByUsername(username)
+<<<<<<< HEAD
                 .orElseThrow(() -> new BusinessException(401, "用户名或密码错误"));
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BusinessException(401, "用户名或密码错误");
+=======
+                .orElseThrow(() -> new RuntimeException("用户名或密码错误"));
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new RuntimeException("用户名或密码错误");
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
         }
 
         String token = jwtUtils.generateToken(username);
@@ -57,7 +74,11 @@ public class UserService {
 
     public Map<String, Object> getUserInfo(String username) {
         User user = userMapper.findByUsername(username)
+<<<<<<< HEAD
                 .orElseThrow(() -> new BusinessException(401, "用户不存在"));
+=======
+                .orElseThrow(() -> new RuntimeException("用户不存在"));
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
         return getUserInfo(user);
     }
 
@@ -69,4 +90,8 @@ public class UserService {
         info.put("createTime", user.getCreateTime());
         return info;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4

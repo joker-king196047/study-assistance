@@ -30,9 +30,12 @@ backend/.DS_Store
 backend/logs/
 backend/*.log
 
+<<<<<<< HEAD
 # MySQL Data (不提交数据库文件)
 mysql-data/
 
+=======
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
 # Logs
 *.log
 logs/

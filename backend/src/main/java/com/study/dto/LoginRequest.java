@@ -12,4 +12,8 @@ public class LoginRequest {
 
     @NotBlank(message = "密码不能为空")
     private String password;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4

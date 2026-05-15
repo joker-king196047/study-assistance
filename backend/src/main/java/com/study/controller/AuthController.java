@@ -47,4 +47,8 @@ public class AuthController {
     public Result<Void> logout() {
         return Result.success();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4

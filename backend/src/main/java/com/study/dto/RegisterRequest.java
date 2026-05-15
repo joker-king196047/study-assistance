@@ -18,4 +18,8 @@ public class RegisterRequest {
     @NotBlank(message = "密码不能为空")
     @Size(min = 6, message = "密码长度不能少于6位")
     private String password;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4

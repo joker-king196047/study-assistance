@@ -44,12 +44,15 @@
         </dependency>
 
         <dependency>
+<<<<<<< HEAD
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
         <dependency>
+=======
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
@@ -113,4 +116,8 @@
             </plugin>
         </plugins>
     </build>
+<<<<<<< HEAD
 </project>
+=======
+</project>
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4

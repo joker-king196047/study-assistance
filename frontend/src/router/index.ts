@@ -9,16 +9,22 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/Landing.vue'),
     meta: { requiresAuth: false }
   },
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
   {
     path: '/home',
     name: 'Home',
     component: () => import('@/views/Home.vue'),
     meta: { requiresAuth: true }
   },
+<<<<<<< HEAD
 
   
+=======
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
   {
     path: '/login',
     name: 'Login',
@@ -54,6 +60,7 @@ const routes: RouteRecordRaw[] = [
     name: 'LocalProfileSetup',
     component: () => import('@/views/profile/LocalProfileSetup.vue'),
     meta: { requiresAuth: true }
+<<<<<<< HEAD
   },
   {
     path: '/question-bank',
@@ -78,6 +85,11 @@ const routes: RouteRecordRaw[] = [
 
 
 
+=======
+  }
+]
+
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
 const router = createRouter({
   history: createWebHistory(),
   routes
@@ -86,7 +98,11 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   const token = userStore.token
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
   if (token && !userStore.userInfo) {
     try {
       await userStore.fetchUserInfo()
@@ -104,4 +120,8 @@ router.beforeEach(async (to, from, next) => {
   }
 })
 
+<<<<<<< HEAD
 export default router
+=======
+export default router
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4

@@ -74,6 +74,7 @@ export interface GlobalProfile {
   personalTraits?: PersonalTraits
 }
 
+<<<<<<< HEAD
 export interface DirectionSkill {
   name: string
   level: string
@@ -134,6 +135,8 @@ export interface LocalProfile {
   }
 }
 
+=======
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
 export interface LearningDirection {
   id: string
   name: string
@@ -166,6 +169,7 @@ export const profileApi = {
     return request.get<LearningDirection[]>(`${API_BASE}/directions`)
   },
 
+<<<<<<< HEAD
   getLocalProfile(directionId: string) {
     return request.get<LocalProfile>(`${API_BASE}/local/${directionId}`)
   },
@@ -178,3 +182,9 @@ export const profileApi = {
     return request.post(`${API_BASE}/complete-setup`, { directionId })
   }
 }
+=======
+  completeProfileSetup(directionId: string) {
+    return request.post(`${API_BASE}/complete-setup`, { directionId })
+  }
+}
+>>>>>>> cb0181847d65aa2475010e5d4d79cb286d531fa4
